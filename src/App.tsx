@@ -2,6 +2,8 @@ import './App.scss';
 
 import React, { Component } from 'react';
 
+import { Feedback } from './feedback';
+
 class App extends Component {
     render() {
         return (
@@ -10,7 +12,7 @@ class App extends Component {
                     Customer Feedback
                 </header>
                 <div className='App__content'>
-                    Content
+                    <Feedback />
                 </div>
             </div>
         );

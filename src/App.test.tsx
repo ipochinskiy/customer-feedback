@@ -13,6 +13,6 @@ describe('Component: App', () => {
     it('should render the content', () => {
         const component = shallow(<App />);
 
-        expect(component).toIncludeText('Content');
+        expect(component.find('Feedback')).toExist();
     });
 });
