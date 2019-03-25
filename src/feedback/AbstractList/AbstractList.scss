@@ -1,0 +1,16 @@
+@import '../../colors.scss';
+
+.AbstractList {
+    &__header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__content {
+
+    }
+
+    &__item {
+
+    }
+}
