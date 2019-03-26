@@ -1,4 +1,7 @@
-import { shallow } from 'enzyme';
+import {
+    shallow,
+    ShallowWrapper,
+} from 'enzyme';
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
 
@@ -40,28 +43,43 @@ describe('Component: Feedback', () => {
     });
 
     describe('when "match.params.customerId" is falsy', () => {
+        let component: ShallowWrapper;
+
         beforeEach(() => {
             props = createComponentProps({
                 match: {
+                    path: '/bazzinga!',
                     params: {
                         customerId: undefined,
                     },
                 },
             });
+            component = shallow(<Feedback {...props} />);
         });
 
         it('should render an empty state', () => {
-            const component = shallow(<Feedback {...props} />);
 
             expect(component).toIncludeText('Please select a customer');
         });
 
         it('should not render the feedback list', () => {
-            const component = shallow(<Feedback {...props} />);
 
             expect(component.find('AbstractList'))
                 .toHaveLength(1)
                 .not.toHaveProp('title', 'Feedback');
+        });
+
+        describe('and when the customer list calls "selectItem" prop', () => {
+            beforeEach(() => {
+                component.find('AbstractList').at(0).prop('selectItem')('cap');
+            });
+
+            it(`should navigate to the customer's feedback`, () => {
+
+                expect(props.history.push)
+                    .toHaveBeenCalledTimes(1)
+                    .toHaveBeenCalledWith('/bazzinga!/cap');
+            });
         });
     });
 
@@ -98,9 +116,12 @@ describe('Component: Feedback', () => {
 
 function createComponentProps(options = {}): RouteComponentProps<PropTypes> {
     return {
-        history: {},
+        history: {
+            push: jest.fn(),
+        } as any,
         location: {},
         match: {
+            path: '/bazzinga!',
             params: {
                 customerId: 'iman',
             },

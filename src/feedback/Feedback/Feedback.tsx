@@ -11,6 +11,17 @@ export interface PropTypes {
 }
 
 class Feedback extends Component<RouteComponentProps<PropTypes>> {
+    constructor(props: RouteComponentProps<PropTypes>) {
+        super(props);
+
+        this.selectCustomer = this.selectCustomer.bind(this);
+    }
+
+    selectCustomer(customerId: string) {
+        const { match, history } = this.props;
+        history.push(`${match.path}/${customerId}`);
+    }
+
     render() {
         const customerList: ListItem[] = [
             { id: 'iman', value: 'Iron Man' },
@@ -38,7 +49,7 @@ class Feedback extends Component<RouteComponentProps<PropTypes>> {
         return (
             <div className='Feedback'>
                 <div className='Feedback__column'>
-                    <AbstractList title='Customers' list={customerList}/>
+                    <AbstractList title='Customers' list={customerList} selectItem={this.selectCustomer}/>
                 </div>
                 {rightColumn}
             </div>
