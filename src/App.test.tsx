@@ -1,18 +1,31 @@
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 
 import App from './App';
 
 describe('Component: App', () => {
     it('should render the title', () => {
-        const component = shallow(<App />);
+
+        const component = mount(
+            <MemoryRouter>
+                <App />
+            </MemoryRouter>
+        );
 
         expect(component).toIncludeText('Customer Feedback');
     });
 
-    it('should render the content', () => {
-        const component = shallow(<App />);
+    it('should redirect to the "/customers" route', () => {
 
-        expect(component.find('Feedback')).toExist();
+        const component = mount(
+            <MemoryRouter initialEntries={[ '/' ]}>
+                <App />
+            </MemoryRouter>
+        );
+
+        expect(component.find('Route'))
+            .toHaveLength(1)
+            .toHaveProp('path', '/customers');
     });
 });
