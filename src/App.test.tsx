@@ -1,9 +1,18 @@
+import { shallow } from 'enzyme';
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import App from './App';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+describe('Component: App', () => {
+    it('should render the title', () => {
+        const component = shallow(<App />);
+
+        expect(component).toIncludeText('Customer Feedback');
+    });
+
+    it('should render the content', () => {
+        const component = shallow(<App />);
+
+        expect(component.find('Feedback')).toExist();
+    });
 });

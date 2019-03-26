@@ -1,0 +1,26 @@
+@import './colors.scss';
+@import './constants.scss';
+
+
+.App {
+    height: 100vh;
+    background-color: $neutral3-3;
+
+    &__header {
+        height: $app-header-height;
+        display: flex;
+        align-items: center;
+        background-color: $primary1-l1;
+        padding: 0 16px;
+
+        &__title {
+            font-size: 32px;
+            line-height: 40px;
+            font-weight: bold;
+        }
+    }
+
+    &__content {
+        height: calc(100vh - #{$app-header-height});
+    }
+}
