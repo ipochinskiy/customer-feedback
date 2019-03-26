@@ -1,11 +1,16 @@
 import './Feedback.scss';
 
 import React, { Component } from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 
 import { ListItem } from '../_domain/ListItem';
 import AbstractList from '../AbstractList/AbstractList';
 
-class Feedback extends Component {
+export interface PropTypes {
+    customerId: string;
+}
+
+class Feedback extends Component<RouteComponentProps<PropTypes>> {
     render() {
         const customerList: ListItem[] = [
             { id: 'iman', value: 'Iron Man' },
@@ -17,14 +22,25 @@ class Feedback extends Component {
             { id: 'second-one', value: 'We want to be able to invite people from outside' },
             { id: 'yet-another-one', value: 'Color scheme needs some adjustments' },
         ];
+        const { match } = this.props;
+
+        let rightColumn;
+        if (match && match.params && match.params.customerId) {
+            rightColumn = (
+                <div className='Feedback__column'>
+                    <AbstractList title='Feedback' list={feedbackList} />
+                </div>
+            );
+        } else {
+            rightColumn = <div className='Feedback__empty'>Please select a customer</div>;
+        }
+
         return (
             <div className='Feedback'>
                 <div className='Feedback__column'>
                     <AbstractList title='Customers' list={customerList}/>
                 </div>
-                <div className='Feedback__column'>
-                    <AbstractList title='Feedback' list={feedbackList}/>
-                </div>
+                {rightColumn}
             </div>
         );
     }
