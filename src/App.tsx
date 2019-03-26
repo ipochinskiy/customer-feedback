@@ -9,7 +9,7 @@ class App extends Component {
         return (
             <div className='App'>
                 <header className='App__header'>
-                    Customer Feedback
+                    <div className='App__header__title'>Customer Feedback</div>
                 </header>
                 <div className='App__content'>
                     <Feedback />

@@ -1,7 +1,13 @@
+@import '../../colors.scss';
+
 .Feedback {
     display: flex;
 
     &__column {
         width: 50%;
+
+        &:first-child {
+            border-right: 1px $neutral3-4 solid;
+        }
     }
 }

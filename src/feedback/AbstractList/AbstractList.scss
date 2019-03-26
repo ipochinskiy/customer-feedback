@@ -1,16 +1,41 @@
 @import '../../colors.scss';
+@import '../../constants.scss';
+
+$title-height: 32px;
+$title-padding: 16px;
+$content-padding-bottom: 24px;
 
 .AbstractList {
     &__header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        padding: $title-padding;
+    }
+
+    &__title {
+        height: $title-height;
+        font-size: 24px;
+        line-height: $title-height;
     }
 
     &__content {
+        height: calc(100vh - #{$app-header-height + $title-height + 2 * $title-padding + $content-padding-bottom});
+        overflow-y: auto;
+        padding-bottom: $content-padding-bottom;
 
+        & > * {
+            border-bottom: 1px $neutral3-4 solid;
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
     }
 
     &__item {
-
+        padding: 0 24px;
+        font-size: 16px;
+        line-height: 24px;
     }
 }
