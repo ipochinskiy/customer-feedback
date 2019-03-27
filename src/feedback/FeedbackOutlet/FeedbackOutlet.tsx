@@ -1,6 +1,10 @@
 import './FeedbackOutlet.scss';
 
-import React, { Component } from 'react';
+import React, {
+    Component,
+    Dispatch,
+} from 'react';
+import { connect } from 'react-redux';
 import {
     RouteComponentProps,
     withRouter,
@@ -8,14 +12,26 @@ import {
 
 import { Customer } from '../_domain/Customer';
 import { Feedback } from '../_domain/Feedback';
+import { StoreState } from '../_domain/StoreState';
+import { ActionTypes } from '../actions';
 import CustomerList from '../CustomerList/CustomerList';
 import FeedbackList from '../FeedbackList/FeedbackList';
 
-export interface PropTypes {
+interface PropsFromRouter {
     customerId: string;
 }
 
-export class FeedbackOutlet extends Component<RouteComponentProps<PropTypes>> {
+interface PropsFromState {
+    customerList: Customer[];
+}
+
+interface PropsFromDispatch {
+    appLoaded: () => void;
+}
+
+export type ComponentProps = RouteComponentProps<PropsFromRouter> & PropsFromState & PropsFromDispatch;
+
+export class FeedbackOutlet extends Component<ComponentProps> {
     render() {
         const customerList: Customer[] = [
             { id: 'iman', name: 'Iron Man', photo: 'http://lorempixel.com/50/50/cats/1' },
@@ -51,4 +67,20 @@ export class FeedbackOutlet extends Component<RouteComponentProps<PropTypes>> {
     }
 }
 
-export default withRouter(FeedbackOutlet);
+const mapStateToProps = (state: StoreState): PropsFromState => {
+    return {
+        customerList: [],
+    };
+};
+
+const mapDisaptchToProps = (dispatch: Dispatch<ActionTypes>): PropsFromDispatch => {
+    return {
+    };
+};
+
+const connectedFeedbackOutlet = connect(
+    mapStateToProps,
+    mapDisaptchToProps,
+)(FeedbackOutlet);
+
+export default withRouter(connectedFeedbackOutlet);

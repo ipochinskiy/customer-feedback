@@ -3,15 +3,14 @@ import {
     ShallowWrapper,
 } from 'enzyme';
 import React from 'react';
-import { RouteComponentProps } from 'react-router';
 
 import {
+    ComponentProps,
     FeedbackOutlet,
-    PropTypes,
 } from './FeedbackOutlet';
 
 describe('Component: FeedbackOutlet', () => {
-    let props: RouteComponentProps<PropTypes>;
+    let props: ComponentProps;
     let component: ShallowWrapper;
 
     describe('when "match.params.customerId" is set', () => {
@@ -103,7 +102,7 @@ describe('Component: FeedbackOutlet', () => {
     });
 });
 
-function createComponentProps(options = {}): RouteComponentProps<PropTypes> {
+function createComponentProps(options = {}): ComponentProps {
     return {
         history: {
             push: jest.fn(),
@@ -115,5 +114,5 @@ function createComponentProps(options = {}): RouteComponentProps<PropTypes> {
             },
         },
         ...options,
-    } as RouteComponentProps<PropTypes>;
+    } as unknown as ComponentProps;
 }
