@@ -1,3 +1,7 @@
+# 0.4.0 (2019-03-27)
+
+* separated customer list from the feedback list
+
 # 0.3.0 (2019-03-27)
 
 * integrate routing for navigating through customer list and their feedback
