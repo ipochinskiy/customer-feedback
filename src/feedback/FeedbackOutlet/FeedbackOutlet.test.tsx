@@ -35,7 +35,7 @@ describe('Component: FeedbackOutlet', () => {
         it('should render customer list', () => {
 
             expect(component.find('FeedbackList').props()).toMatchObject({
-                title: 'FeedbackOutlet',
+                title: 'Feedback',
                 feedbackList: expect.arrayContaining([
                     expect.objectContaining({ id: 'first-feedback', text: 'It would be great if we would see all statistics on one place' }),
                     expect.objectContaining({ id: 'second-one', text: 'We want to be able to invite people from outside' }),
