@@ -1,3 +1,7 @@
+# 0.4.1 (2019-03-27)
+
+* fix title parameter in tests for FeedbackOutlet
+
 # 0.4.0 (2019-03-27)
 
 * separated customer list from the feedback list
