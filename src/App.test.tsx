@@ -15,17 +15,4 @@ describe('Component: App', () => {
 
         expect(component).toIncludeText('Customer Feedback');
     });
-
-    it('should redirect to the "/customers" route', () => {
-
-        const component = mount(
-            <MemoryRouter initialEntries={[ '/' ]}>
-                <App />
-            </MemoryRouter>
-        );
-
-        expect(component.find('Route'))
-            .toHaveLength(1)
-            .toHaveProp('path', '/customers');
-    });
 });
