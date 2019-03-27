@@ -19,7 +19,7 @@ class App extends Component {
                 <div className='App__content'>
                     <Switch>
                         <Route exact path="/" render={() => <Redirect to='/customers'/>} />
-                            <Route path="/customers" component={Feedback} />
+                        <Route exact path="/customers" component={Feedback} />
                         <Route path="/customers/:customerId" component={Feedback} />
                     </Switch>
                 </div>
