@@ -17,25 +17,25 @@ describe('Component: FeedbackList', () => {
 
     it('should render the title', () => {
 
-        expect(component).toIncludeText('Avengers');
+        expect(component).toIncludeText('Feedback');
     });
 
     it('should render the values', () => {
 
         expect(component)
-            .toIncludeText('Iron Man')
-            .toIncludeText('Captain America')
-            .toIncludeText('Hulk');
+            .toIncludeText('I have a problem')
+            .toIncludeText('A terrible one')
+            .toIncludeText('Yet another huge and fat one');
     });
 });
 
 function createComponentProps(options = {}): PropTypes {
     return {
-        title: 'Avengers',
+        title: 'Feedback',
         feedbackList: [
-            { id: 'iman', name: 'Iron Man', photo: null },
-            { id: 'cap', name: 'Captain America', photo: null },
-            { id: 'hulk', name: 'Hulk', photo: null },
+            { id: 'first one', text: 'I have a problem' },
+            { id: 'second one', text: 'A terrible one' },
+            { id: 'third one', text: 'Yet another huge and fat one' },
         ],
         ...options,
     };

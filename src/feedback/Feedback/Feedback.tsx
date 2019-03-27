@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { Customer } from '../_domain/Customer';
+import { Feedback as IFeedback } from '../_domain/Feedback';
 import CustomerList from '../CustomerList/CustomerList';
 import FeedbackList from '../FeedbackList/FeedbackList';
 
@@ -21,10 +22,10 @@ export class Feedback extends Component<RouteComponentProps<PropTypes>> {
             { id: 'cap', name: 'Captain America', photo: 'http://lorempixel.com/50/50/cats/2' },
             { id: 'hulk', name: 'Hulk', photo: 'http://lorempixel.com/50/50/cats/3' },
         ];
-        const feedbackList: Customer[] = [
-            { id: 'first-feedback', name: 'It would be great if we would see all statistics on one place', photo: null },
-            { id: 'second-one', name: 'We want to be able to invite people from outside', photo: null },
-            { id: 'yet-another-one', name: 'Color scheme needs some adjustments', photo: null },
+        const feedbackList: IFeedback[] = [
+            { id: 'first-feedback', text: 'It would be great if we would see all statistics on one place' },
+            { id: 'second-one', text: 'We want to be able to invite people from outside' },
+            { id: 'yet-another-one', text: 'Color scheme needs some adjustments' },
         ];
         const { match } = this.props;
 

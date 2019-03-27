@@ -37,9 +37,9 @@ describe('Component: Feedback', () => {
             expect(component.find('FeedbackList').props()).toMatchObject({
                 title: 'Feedback',
                 feedbackList: expect.arrayContaining([
-                    expect.objectContaining({ id: 'first-feedback', name: 'It would be great if we would see all statistics on one place' }),
-                    expect.objectContaining({ id: 'second-one', name: 'We want to be able to invite people from outside' }),
-                    expect.objectContaining({ id: 'yet-another-one', name: 'Color scheme needs some adjustments' }),
+                    expect.objectContaining({ id: 'first-feedback', text: 'It would be great if we would see all statistics on one place' }),
+                    expect.objectContaining({ id: 'second-one', text: 'We want to be able to invite people from outside' }),
+                    expect.objectContaining({ id: 'yet-another-one', text: 'Color scheme needs some adjustments' }),
                 ]),
             });
         });
