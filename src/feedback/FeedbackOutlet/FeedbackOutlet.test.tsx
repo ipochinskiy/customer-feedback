@@ -6,18 +6,18 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router';
 
 import {
-    Feedback,
+    FeedbackOutlet,
     PropTypes,
-} from './Feedback';
+} from './FeedbackOutlet';
 
-describe('Component: Feedback', () => {
+describe('Component: FeedbackOutlet', () => {
     let props: RouteComponentProps<PropTypes>;
     let component: ShallowWrapper;
 
     describe('when "match.params.customerId" is set', () => {
         beforeEach(() => {
             props = createComponentProps();
-            component = shallow(<Feedback {...props} />);
+            component = shallow(<FeedbackOutlet {...props} />);
         });
 
         it('should render customer list', () => {
@@ -35,7 +35,7 @@ describe('Component: Feedback', () => {
         it('should render customer list', () => {
 
             expect(component.find('FeedbackList').props()).toMatchObject({
-                title: 'Feedback',
+                title: 'FeedbackOutlet',
                 feedbackList: expect.arrayContaining([
                     expect.objectContaining({ id: 'first-feedback', text: 'It would be great if we would see all statistics on one place' }),
                     expect.objectContaining({ id: 'second-one', text: 'We want to be able to invite people from outside' }),
@@ -56,7 +56,7 @@ describe('Component: Feedback', () => {
                     },
                 },
             });
-            component = shallow(<Feedback {...props} />);
+            component = shallow(<FeedbackOutlet {...props} />);
         });
 
         it('should render an empty state', () => {
@@ -79,7 +79,7 @@ describe('Component: Feedback', () => {
                     params: undefined,
                 },
             });
-            component = shallow(<Feedback {...props} />);
+            component = shallow(<FeedbackOutlet {...props} />);
         });
 
         it('should render an empty state', () => {
@@ -93,7 +93,7 @@ describe('Component: Feedback', () => {
             props = createComponentProps({
                 match: undefined,
             });
-            component = shallow(<Feedback {...props} />);
+            component = shallow(<FeedbackOutlet {...props} />);
         });
 
         it('should render an empty state', () => {

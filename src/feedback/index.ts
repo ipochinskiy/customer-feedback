@@ -1,3 +1,3 @@
-import Feedback from './Feedback/Feedback';
+import FeedbackOutlet from './FeedbackOutlet/FeedbackOutlet';
 
-export { Feedback };
+export { FeedbackOutlet };
