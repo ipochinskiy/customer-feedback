@@ -4,15 +4,15 @@ import {
 } from 'enzyme';
 import React from 'react';
 
-import AbstractList, { PropTypes } from './AbstractList';
+import CustomerList, { PropTypes } from './CustomerList';
 
-describe('Component: AbstractList', () => {
+describe('Component: CustomerList', () => {
     let props: PropTypes;
     let component: ShallowWrapper;
 
     beforeEach(() => {
         props = createComponentProps();
-        component = shallow(<AbstractList {...props} />);
+        component = shallow(<CustomerList {...props} />);
     });
 
     it('should render the title', () => {

@@ -1,4 +1,4 @@
-import './AbstractList.scss';
+import './CustomerList.scss';
 
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -10,22 +10,22 @@ export interface PropTypes {
     list: ListItem[];
 }
 
-class AbstractList extends Component<PropTypes> {
+class CustomerList extends Component<PropTypes> {
     render() {
         const { title, list } = this.props;
 
         return (
-            <div className='AbstractList'>
-                <div className='AbstractList__header'>
-                    <div className='AbstractList__title'>{title}</div>
+            <div className='CustomerList'>
+                <div className='CustomerList__header'>
+                    <div className='CustomerList__title'>{title}</div>
                 </div>
-                <div className='AbstractList__content'>
+                <div className='CustomerList__content'>
                     {list.map((item: any) =>
                         <NavLink
                             key={item.id}
                             to={`/customers/${item.id}`}
-                            className='AbstractList__item'
-                            activeClassName='AbstractList__item--active'
+                            className='CustomerList__item'
+                            activeClassName='CustomerList__item--active'
                         >
                             {item.value}
                         </NavLink>
@@ -36,4 +36,4 @@ class AbstractList extends Component<PropTypes> {
     }
 }
 
-export default AbstractList;
+export default CustomerList;

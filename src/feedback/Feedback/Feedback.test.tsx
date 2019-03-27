@@ -22,7 +22,7 @@ describe('Component: Feedback', () => {
 
         it('should render customer list', () => {
 
-            expect(component.find('AbstractList').at(0).props()).toMatchObject({
+            expect(component.find('CustomerList').at(0).props()).toMatchObject({
                 title: 'Customers',
                 list: [
                     { id: 'iman', value: 'Iron Man' },
@@ -34,7 +34,7 @@ describe('Component: Feedback', () => {
 
         it('should render customer list', () => {
 
-            expect(component.find('AbstractList').at(1).props()).toMatchObject({
+            expect(component.find('CustomerList').at(1).props()).toMatchObject({
                 title: 'Feedback',
                 list: [
                     { id: 'first-feedback', value: 'It would be great if we would see all statistics on one place' },
@@ -66,7 +66,7 @@ describe('Component: Feedback', () => {
 
         it('should not render the feedback list', () => {
 
-            expect(component.find('AbstractList'))
+            expect(component.find('CustomerList'))
                 .toHaveLength(1)
                 .toHaveProp('title', 'Customers');
         });

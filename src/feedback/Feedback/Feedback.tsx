@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import { ListItem } from '../_domain/ListItem';
-import AbstractList from '../AbstractList/AbstractList';
+import CustomerList from '../CustomerList/CustomerList';
 
 export interface PropTypes {
     customerId: string;
@@ -31,7 +31,7 @@ export class Feedback extends Component<RouteComponentProps<PropTypes>> {
         if (match && match.params && match.params.customerId) {
             rightColumn = (
                 <div className='Feedback__column'>
-                    <AbstractList title='Feedback' list={feedbackList} />
+                    <CustomerList title='Feedback' list={feedbackList} />
                 </div>
             );
         } else {
@@ -41,7 +41,7 @@ export class Feedback extends Component<RouteComponentProps<PropTypes>> {
         return (
             <div className='Feedback'>
                 <div className='Feedback__column'>
-                    <AbstractList title='Customers' list={customerList} />
+                    <CustomerList title='Customers' list={customerList} />
                 </div>
                 {rightColumn}
             </div>
