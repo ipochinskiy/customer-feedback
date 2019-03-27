@@ -4,15 +4,15 @@ import {
 } from 'enzyme';
 import React from 'react';
 
-import AbstractList, { PropTypes } from './AbstractList';
+import CustomerList, { PropTypes } from './CustomerList';
 
-describe('Component: AbstractList', () => {
+describe('Component: CustomerList', () => {
     let props: PropTypes;
     let component: ShallowWrapper;
 
     beforeEach(() => {
         props = createComponentProps();
-        component = shallow(<AbstractList {...props} />);
+        component = shallow(<CustomerList {...props} />);
     });
 
     it('should render the title', () => {
@@ -37,10 +37,10 @@ describe('Component: AbstractList', () => {
 function createComponentProps(options = {}): PropTypes {
     return {
         title: 'Avengers',
-        list: [
-            { id: 'iman', value: 'Iron Man' },
-            { id: 'cap', value: 'Captain America' },
-            { id: 'hulk', value: 'Hulk' },
+        customerList: [
+            { id: 'iman', name: 'Iron Man', photo: 'photo/of/iman' },
+            { id: 'cap', name: 'Captain America', photo: 'photo/of/cap' },
+            { id: 'hulk', name: 'Hulk', photo: 'photo/of/hulk' },
         ],
         ...options,
     };

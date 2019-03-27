@@ -7,7 +7,7 @@ import {
     Switch,
 } from 'react-router-dom';
 
-import { Feedback } from './feedback';
+import { FeedbackOutlet } from './feedback';
 
 class App extends Component {
     render() {
@@ -19,8 +19,8 @@ class App extends Component {
                 <div className='App__content'>
                     <Switch>
                         <Route exact path="/" render={() => <Redirect to='/customers'/>} />
-                        <Route exact path="/customers" component={Feedback} />
-                        <Route path="/customers/:customerId" component={Feedback} />
+                        <Route exact path="/customers" component={FeedbackOutlet} />
+                        <Route path="/customers/:customerId" component={FeedbackOutlet} />
                     </Switch>
                 </div>
             </div>
