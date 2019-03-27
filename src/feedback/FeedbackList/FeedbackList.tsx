@@ -2,11 +2,11 @@ import './FeedbackList.scss';
 
 import React, { Component } from 'react';
 
-import { ListItem } from '../_domain/ListItem';
+import { Customer } from '../_domain/Customer';
 
 export interface PropTypes {
     title: string;
-    feedbackList: ListItem[];
+    feedbackList: Customer[];
 }
 
 class FeedbackList extends Component<PropTypes> {
@@ -19,7 +19,7 @@ class FeedbackList extends Component<PropTypes> {
                     <div className='FeedbackList__title'>{title}</div>
                 </div>
                 <div className='FeedbackList__content'>
-                    {feedbackList.map((item: ListItem) =>
+                    {feedbackList.map((item: Customer) =>
                         <div key={item.id} className='FeedbackList__item'>
                             {item.name}
                         </div>

@@ -6,7 +6,7 @@ import {
     withRouter,
 } from 'react-router-dom';
 
-import { ListItem } from '../_domain/ListItem';
+import { Customer } from '../_domain/Customer';
 import CustomerList from '../CustomerList/CustomerList';
 import FeedbackList from '../FeedbackList/FeedbackList';
 
@@ -16,15 +16,15 @@ export interface PropTypes {
 
 export class Feedback extends Component<RouteComponentProps<PropTypes>> {
     render() {
-        const customerList: ListItem[] = [
-            { id: 'iman', value: 'Iron Man' },
-            { id: 'cap', value: 'Captain America' },
-            { id: 'hulk', value: 'Hulk' },
+        const customerList: Customer[] = [
+            { id: 'iman', name: 'Iron Man', photo: 'http://lorempixel.com/50/50/cats/1' },
+            { id: 'cap', name: 'Captain America', photo: 'http://lorempixel.com/50/50/cats/2' },
+            { id: 'hulk', name: 'Hulk', photo: 'http://lorempixel.com/50/50/cats/3' },
         ];
-        const feedbackList: ListItem[] = [
-            { id: 'first-feedback', value: 'It would be great if we would see all statistics on one place' },
-            { id: 'second-one', value: 'We want to be able to invite people from outside' },
-            { id: 'yet-another-one', value: 'Color scheme needs some adjustments' },
+        const feedbackList: Customer[] = [
+            { id: 'first-feedback', name: 'It would be great if we would see all statistics on one place', photo: null },
+            { id: 'second-one', name: 'We want to be able to invite people from outside', photo: null },
+            { id: 'yet-another-one', name: 'Color scheme needs some adjustments', photo: null },
         ];
         const { match } = this.props;
 
@@ -42,7 +42,7 @@ export class Feedback extends Component<RouteComponentProps<PropTypes>> {
         return (
             <div className='Feedback'>
                 <div className='Feedback__column'>
-                    <CustomerList title='Customers' list={customerList} />
+                    <CustomerList title='Customers' customerList={customerList} />
                 </div>
                 {rightColumn}
             </div>

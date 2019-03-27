@@ -37,10 +37,10 @@ describe('Component: CustomerList', () => {
 function createComponentProps(options = {}): PropTypes {
     return {
         title: 'Avengers',
-        list: [
-            { id: 'iman', value: 'Iron Man' },
-            { id: 'cap', value: 'Captain America' },
-            { id: 'hulk', value: 'Hulk' },
+        customerList: [
+            { id: 'iman', name: 'Iron Man', photo: 'photo/of/iman' },
+            { id: 'cap', name: 'Captain America', photo: 'photo/of/cap' },
+            { id: 'hulk', name: 'Hulk', photo: 'photo/of/hulk' },
         ],
         ...options,
     };
