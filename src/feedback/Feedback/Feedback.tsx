@@ -8,6 +8,7 @@ import {
 
 import { ListItem } from '../_domain/ListItem';
 import CustomerList from '../CustomerList/CustomerList';
+import FeedbackList from '../FeedbackList/FeedbackList';
 
 export interface PropTypes {
     customerId: string;
@@ -31,7 +32,7 @@ export class Feedback extends Component<RouteComponentProps<PropTypes>> {
         if (match && match.params && match.params.customerId) {
             rightColumn = (
                 <div className='Feedback__column'>
-                    <CustomerList title='Feedback' list={feedbackList} />
+                    <FeedbackList title='Feedback' feedbackList={feedbackList} />
                 </div>
             );
         } else {

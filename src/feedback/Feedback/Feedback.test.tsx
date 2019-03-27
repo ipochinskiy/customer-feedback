@@ -22,25 +22,25 @@ describe('Component: Feedback', () => {
 
         it('should render customer list', () => {
 
-            expect(component.find('CustomerList').at(0).props()).toMatchObject({
+            expect(component.find('CustomerList').props()).toMatchObject({
                 title: 'Customers',
-                list: [
-                    { id: 'iman', value: 'Iron Man' },
-                    { id: 'cap', value: 'Captain America' },
-                    { id: 'hulk', value: 'Hulk' },
-                ],
+                customerList: expect.arrayContaining([
+                    expect.objectContaining({ id: 'iman', name: 'Iron Man' }),
+                    expect.objectContaining({ id: 'cap', name: 'Captain America' }),
+                    expect.objectContaining({ id: 'hulk', name: 'Hulk' }),
+                ]),
             });
         });
 
         it('should render customer list', () => {
 
-            expect(component.find('CustomerList').at(1).props()).toMatchObject({
+            expect(component.find('FeedbackList').props()).toMatchObject({
                 title: 'Feedback',
-                list: [
-                    { id: 'first-feedback', value: 'It would be great if we would see all statistics on one place' },
-                    { id: 'second-one', value: 'We want to be able to invite people from outside' },
-                    { id: 'yet-another-one', value: 'Color scheme needs some adjustments' },
-                ],
+                feedbackList: expect.arrayContaining([
+                    expect.objectContaining({ id: 'first-feedback', name: 'It would be great if we would see all statistics on one place' }),
+                    expect.objectContaining({ id: 'second-one', name: 'We want to be able to invite people from outside' }),
+                    expect.objectContaining({ id: 'yet-another-one', name: 'Color scheme needs some adjustments' }),
+                ]),
             });
         });
     });
