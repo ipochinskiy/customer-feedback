@@ -5,18 +5,22 @@ import {
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
 
-import Feedback, { PropTypes } from './Feedback';
+import {
+    Feedback,
+    PropTypes,
+} from './Feedback';
 
 describe('Component: Feedback', () => {
     let props: RouteComponentProps<PropTypes>;
+    let component: ShallowWrapper;
 
     describe('when "match.params.customerId" is set', () => {
         beforeEach(() => {
             props = createComponentProps();
+            component = shallow(<Feedback {...props} />);
         });
 
         it('should render customer list', () => {
-            const component = shallow(<Feedback {...props} />);
 
             expect(component.find('AbstractList').at(0).props()).toMatchObject({
                 title: 'Customers',
@@ -29,7 +33,6 @@ describe('Component: Feedback', () => {
         });
 
         it('should render customer list', () => {
-            const component = shallow(<Feedback {...props} />);
 
             expect(component.find('AbstractList').at(1).props()).toMatchObject({
                 title: 'Feedback',
@@ -43,7 +46,6 @@ describe('Component: Feedback', () => {
     });
 
     describe('when "match.params.customerId" is falsy', () => {
-        let component: ShallowWrapper;
 
         beforeEach(() => {
             props = createComponentProps({
@@ -66,20 +68,7 @@ describe('Component: Feedback', () => {
 
             expect(component.find('AbstractList'))
                 .toHaveLength(1)
-                .not.toHaveProp('title', 'Feedback');
-        });
-
-        describe('and when the customer list calls "selectItem" prop', () => {
-            beforeEach(() => {
-                component.find('AbstractList').at(0).prop('selectItem')('cap');
-            });
-
-            it(`should navigate to the customer's feedback`, () => {
-
-                expect(props.history.push)
-                    .toHaveBeenCalledTimes(1)
-                    .toHaveBeenCalledWith('/bazzinga!/cap');
-            });
+                .toHaveProp('title', 'Customers');
         });
     });
 
@@ -90,10 +79,10 @@ describe('Component: Feedback', () => {
                     params: undefined,
                 },
             });
+            component = shallow(<Feedback {...props} />);
         });
 
         it('should render an empty state', () => {
-            const component = shallow(<Feedback {...props} />);
 
             expect(component).toIncludeText('Please select a customer');
         });
@@ -104,10 +93,10 @@ describe('Component: Feedback', () => {
             props = createComponentProps({
                 match: undefined,
             });
+            component = shallow(<Feedback {...props} />);
         });
 
         it('should render an empty state', () => {
-            const component = shallow(<Feedback {...props} />);
 
             expect(component).toIncludeText('Please select a customer');
         });
@@ -121,7 +110,6 @@ function createComponentProps(options = {}): RouteComponentProps<PropTypes> {
         } as any,
         location: {},
         match: {
-            path: '/bazzinga!',
             params: {
                 customerId: 'iman',
             },

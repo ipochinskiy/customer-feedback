@@ -22,22 +22,14 @@ describe('Component: AbstractList', () => {
 
     it('should render the values', () => {
 
-        expect(component)
-            .toIncludeText('Iron Man')
-            .toIncludeText('Captain America')
-            .toIncludeText('Hulk');
-    });
-
-    describe('after click on an item', () => {
-        beforeEach(() => {
-            component.find('.AbstractList__item').at(1).simulate('click');
+        expect(component.find('NavLink').at(0).props()).toMatchObject({
+            to: '/customers/iman',
         });
-
-        it('should call "selectItem" with the id of the item', () => {
-
-            expect(props.selectItem)
-                .toHaveBeenCalledTimes(1)
-                .toHaveBeenCalledWith('cap');
+        expect(component.find('NavLink').at(1).props()).toMatchObject({
+            to: '/customers/cap',
+        });
+        expect(component.find('NavLink').at(2).props()).toMatchObject({
+            to: '/customers/hulk',
         });
     });
 });
@@ -50,7 +42,6 @@ function createComponentProps(options = {}): PropTypes {
             { id: 'cap', value: 'Captain America' },
             { id: 'hulk', value: 'Hulk' },
         ],
-        selectItem: jest.fn(),
         ...options,
     };
 }

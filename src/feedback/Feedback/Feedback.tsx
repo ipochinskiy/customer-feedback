@@ -1,7 +1,10 @@
 import './Feedback.scss';
 
 import React, { Component } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import {
+    RouteComponentProps,
+    withRouter,
+} from 'react-router-dom';
 
 import { ListItem } from '../_domain/ListItem';
 import AbstractList from '../AbstractList/AbstractList';
@@ -10,18 +13,7 @@ export interface PropTypes {
     customerId: string;
 }
 
-class Feedback extends Component<RouteComponentProps<PropTypes>> {
-    constructor(props: RouteComponentProps<PropTypes>) {
-        super(props);
-
-        this.selectCustomer = this.selectCustomer.bind(this);
-    }
-
-    selectCustomer(customerId: string) {
-        const { match, history } = this.props;
-        history.push(`${match.path}/${customerId}`);
-    }
-
+export class Feedback extends Component<RouteComponentProps<PropTypes>> {
     render() {
         const customerList: ListItem[] = [
             { id: 'iman', value: 'Iron Man' },
@@ -49,7 +41,7 @@ class Feedback extends Component<RouteComponentProps<PropTypes>> {
         return (
             <div className='Feedback'>
                 <div className='Feedback__column'>
-                    <AbstractList title='Customers' list={customerList} selectItem={this.selectCustomer}/>
+                    <AbstractList title='Customers' list={customerList} />
                 </div>
                 {rightColumn}
             </div>
@@ -57,4 +49,4 @@ class Feedback extends Component<RouteComponentProps<PropTypes>> {
     }
 }
 
-export default Feedback;
+export default withRouter(Feedback);
