@@ -24,8 +24,8 @@ class CustomerList extends Component<PropTypes> {
                         <NavLink
                             key={customer.id}
                             to={`/customers/${customer.id}`}
-                            className='CustomerList__customer'
-                            activeClassName='CustomerList__customer--active'
+                            className='CustomerList__item'
+                            activeClassName='CustomerList__item--active'
                         >
                             {customer.name}
                         </NavLink>
