@@ -2,6 +2,7 @@ import './App.scss';
 
 import React, { Component } from 'react';
 import {
+    NavLink,
     Redirect,
     Route,
     Switch,
@@ -14,7 +15,7 @@ class App extends Component {
         return (
             <div className='App'>
                 <header className='App__header'>
-                    <div className='App__header__title'>Customer Feedback</div>
+                    <NavLink to='/' className='App__header__title'>Customer Feedback</NavLink>
                 </header>
                 <div className='App__content'>
                     <Switch>
