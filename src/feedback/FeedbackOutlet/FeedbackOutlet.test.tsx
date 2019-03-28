@@ -110,6 +110,19 @@ describe('Component: FeedbackOutlet', () => {
             expect(component).toIncludeText('Please select a customer');
         });
     });
+
+    describe('when CustomerList calls "addCustomer" prop', () => {
+        beforeEach(() => {
+            (component.find('CustomerList').prop('addCustomer') as Function)('Captain Marvel');
+        });
+
+        it('should call "newCustomerAddStarted" prop', () => {
+
+            expect(props.newCustomerAddStarted)
+                .toHaveBeenCalledTimes(1)
+                .toHaveBeenCalledWith('Captain Marvel');
+        });
+    });
 });
 
 function createComponentProps(options = {}): ComponentProps {
@@ -139,15 +152,16 @@ function createComponentProps(options = {}): ComponentProps {
             },
         ],
         feedbackLoaded: jest.fn(),
+        newCustomerAddStarted: jest.fn(),
         history: {
             push: jest.fn(),
-        } as any,
-        location: {},
+        } as unknown as any,
+        location: {} as unknown as any,
         match: {
             params: {
                 customerId: 'iman',
             },
-        },
+        } as unknown as any,
         ...options,
-    } as unknown as ComponentProps;
+    } as ComponentProps;
 }

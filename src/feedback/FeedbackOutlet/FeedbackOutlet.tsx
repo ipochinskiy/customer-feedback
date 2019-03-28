@@ -14,6 +14,7 @@ import { Customer } from '../_domain/Customer';
 import {
     ActionTypes,
     feedbackLoaded,
+    newCustomerAddStarted,
 } from '../actions';
 import CustomerList from '../CustomerList/CustomerList';
 import FeedbackList from '../FeedbackList/FeedbackList';
@@ -29,6 +30,7 @@ interface PropsFromState {
 
 interface PropsFromDispatch {
     feedbackLoaded: () => void;
+    newCustomerAddStarted: (newCustomerName: string) => void;
 }
 
 export type ComponentProps = RouteComponentProps<PropsFromRouter> & PropsFromState & PropsFromDispatch;
@@ -46,7 +48,8 @@ export class FeedbackOutlet extends Component<ComponentProps> {
     }
 
     addCustomer(newCustomerName: string) {
-        console.log(newCustomerName);
+        const { newCustomerAddStarted } = this.props;
+        newCustomerAddStarted(newCustomerName);
     }
 
     render() {
@@ -86,6 +89,7 @@ const mapStateToProps = (state: any): PropsFromState => {
 const mapDisaptchToProps = (dispatch: Dispatch<ActionTypes>): PropsFromDispatch => {
     return {
         feedbackLoaded: () => dispatch(feedbackLoaded()),
+        newCustomerAddStarted: (newCustomerName: string) => dispatch(newCustomerAddStarted(newCustomerName)),
     };
 };
 
