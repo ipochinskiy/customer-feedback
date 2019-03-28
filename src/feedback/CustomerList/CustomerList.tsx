@@ -3,29 +3,91 @@ import './CustomerList.scss';
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import { Button } from '../../ui-components';
 import { Customer } from '../_domain/Customer';
 
 export interface PropTypes {
     title: string;
     customerList: Customer[];
+    addCustomer: (newCustomerName: string) => void;
 }
 
-class CustomerList extends Component<PropTypes> {
+interface State {
+    isCustomerFormShow: boolean;
+    newCustomerName: string;
+}
+
+class CustomerList extends Component<PropTypes, State> {
+    state = {
+        isCustomerFormShow: false,
+        newCustomerName: '',
+    };
+
+    constructor(props: PropTypes) {
+        super(props);
+
+        this.toggleCustomerFormVisibility = this.toggleCustomerFormVisibility.bind(this);
+        this.changeNewCustomerName = this.changeNewCustomerName.bind(this);
+        this.addCustomer = this.addCustomer.bind(this);
+    }
+
+    toggleCustomerFormVisibility() {
+        this.setState({ isCustomerFormShow: !this.state.isCustomerFormShow });
+    }
+
+    changeNewCustomerName(event: any) {
+        if (!event || !event.target) {
+            return;
+        }
+
+        this.setState({ newCustomerName: event.target.value });
+    }
+
+    addCustomer(event: any) {
+        if (event && event.preventDefault) {
+            event.preventDefault();
+        }
+
+        const { newCustomerName } = this.state;
+        const { addCustomer } = this.props;
+
+        if (!newCustomerName) {
+            return;
+        }
+
+        addCustomer(newCustomerName);
+        this.toggleCustomerFormVisibility();
+    }
+
     render() {
         const { title, customerList } = this.props;
+        const { isCustomerFormShow } = this.state;
+
+        let customerForm;
+        if (isCustomerFormShow) {
+            customerForm = <form onSubmit={this.addCustomer}>
+                <input
+                    className='CustomerList__item'
+                    maxLength={40}
+                    onChange={this.changeNewCustomerName}
+                />
+            </form>;
+        }
 
         return (
             <div className='CustomerList'>
                 <div className='CustomerList__header'>
                     <div className='CustomerList__title'>{title}</div>
+                    <Button shape='primary' onClick={this.toggleCustomerFormVisibility}>Add customer</Button>
                 </div>
                 <div className='CustomerList__content'>
-                    {customerList.map((customer: any, index: number) =>
+                    {customerForm}
+                    {customerList.map((customer: Customer) =>
                         <NavLink
                             key={customer.id}
                             to={`/customers/${customer.id}`}
-                            className='CustomerList__item'
-                            activeClassName='CustomerList__item--active'
+                            className='CustomerList__link'
+                            activeClassName='CustomerList__link--active'
                         >
                             {customer.name}
                         </NavLink>

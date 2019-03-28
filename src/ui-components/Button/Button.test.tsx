@@ -15,4 +15,13 @@ describe('Component: Button', () => {
 
         expect(component).toIncludeText('a tiny pretty button');
     });
+
+    it('should pass the rest of the props over to the button', () => {
+        const component = shallow(<Button shape='primary' type='reset' foo='bar'>a tiny pretty button</Button>);
+
+        expect(component.find('button').props()).toMatchObject({
+            type: 'reset',
+            foo: 'bar',
+        });
+    });
 });

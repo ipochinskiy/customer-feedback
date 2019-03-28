@@ -34,9 +34,19 @@ interface PropsFromDispatch {
 export type ComponentProps = RouteComponentProps<PropsFromRouter> & PropsFromState & PropsFromDispatch;
 
 export class FeedbackOutlet extends Component<ComponentProps> {
+    constructor(props: ComponentProps) {
+        super(props);
+
+        this.addCustomer = this.addCustomer.bind(this);
+    }
+
     componentDidMount() {
         const { feedbackLoaded } = this.props;
         feedbackLoaded();
+    }
+
+    addCustomer(newCustomerName: string) {
+        console.log(newCustomerName);
     }
 
     render() {
@@ -59,7 +69,7 @@ export class FeedbackOutlet extends Component<ComponentProps> {
         return (
             <div className='FeedbackOutlet'>
                 <div className='FeedbackOutlet__column'>
-                    <CustomerList title='Customers' customerList={customerList} />
+                    <CustomerList title='Customers' customerList={customerList} addCustomer={this.addCustomer}/>
                 </div>
                 {rightColumn}
             </div>
