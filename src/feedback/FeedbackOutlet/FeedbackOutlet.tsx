@@ -72,7 +72,7 @@ export class FeedbackOutlet extends Component<ComponentProps> {
         return (
             <div className='FeedbackOutlet'>
                 <div className='FeedbackOutlet__column'>
-                    <CustomerList title='Customers' customerList={customerList} addCustomer={this.addCustomer}/>
+                    <CustomerList customerList={customerList} addCustomer={this.addCustomer}/>
                 </div>
                 {rightColumn}
             </div>

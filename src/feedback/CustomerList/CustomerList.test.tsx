@@ -17,7 +17,7 @@ describe('Component: CustomerList', () => {
 
     it('should render the title', () => {
 
-        expect(component).toIncludeText('Avengers');
+        expect(component).toIncludeText('Customers');
     });
 
     it('should not render an input field', () => {
@@ -144,7 +144,6 @@ describe('Component: CustomerList', () => {
 
 function createComponentProps(options = {}): PropTypes {
     return {
-        title: 'Avengers',
         customerList: [
             { id: 'iman', name: 'Iron Man', photo: 'photo/of/iman', feedbackList: [] },
             { id: 'cap', name: 'Captain America', photo: 'photo/of/cap', feedbackList: [] },

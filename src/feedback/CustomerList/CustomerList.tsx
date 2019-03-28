@@ -7,7 +7,6 @@ import { Button } from '../../ui-components';
 import { Customer } from '../_domain/Customer';
 
 export interface PropTypes {
-    title: string;
     customerList: Customer[];
     addCustomer: (newCustomerName: string) => void;
 }
@@ -60,7 +59,7 @@ class CustomerList extends Component<PropTypes, State> {
     }
 
     render() {
-        const { title, customerList } = this.props;
+        const { customerList } = this.props;
         const { isCustomerFormShow } = this.state;
 
         let customerForm;
@@ -77,7 +76,7 @@ class CustomerList extends Component<PropTypes, State> {
         return (
             <div className='CustomerList'>
                 <div className='CustomerList__header'>
-                    <div className='CustomerList__title'>{title}</div>
+                    <div className='CustomerList__title'>Customers</div>
                     <Button shape='primary' onClick={this.toggleCustomerFormVisibility}>Add customer</Button>
                 </div>
                 <div className='CustomerList__content'>

@@ -32,7 +32,6 @@ describe('Component: FeedbackOutlet', () => {
         it('should render customer list', () => {
 
             expect(component.find('CustomerList').props()).toMatchObject({
-                title: 'Customers',
                 customerList: expect.arrayContaining([
                     expect.objectContaining({ id: 'iman', name: 'Iron Man' }),
                     expect.objectContaining({ id: 'cap', name: 'Captain America' }),
@@ -74,9 +73,7 @@ describe('Component: FeedbackOutlet', () => {
 
         it('should not render the feedback list', () => {
 
-            expect(component.find('CustomerList'))
-                .toHaveLength(1)
-                .toHaveProp('title', 'Customers');
+            expect(component.find('FeedbackList')).not.toExist();
         });
     });
 
