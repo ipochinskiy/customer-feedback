@@ -10,8 +10,9 @@
         height: $app-header-height;
         display: flex;
         align-items: center;
-        background-color: $primary1-l1;
+        background-color: $secondary2-l3;
         padding: 0 16px;
+        box-shadow: 1px 1px 5px $neutral3-6;
 
         &__title {
             font-size: 32px;
