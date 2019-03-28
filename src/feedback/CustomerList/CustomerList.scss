@@ -5,6 +5,7 @@ $title-height: 32px;
 $title-padding: 16px;
 $content-padding-bottom: 24px;
 $item-padding-aside: 24px;
+$item-height: 60px;
 
 .CustomerList {
     &__header {
@@ -37,6 +38,7 @@ $item-padding-aside: 24px;
     &__item {
         display: block;
         width: calc(100% - #{$item-padding-aside * 2});
+        height: $item-height;
         outline: none;
         border: none;
         padding: 0 $item-padding-aside;
@@ -46,7 +48,9 @@ $item-padding-aside: 24px;
     }
 
     &__link {
-        display: block;
+        height: $item-height;
+        display: flex;
+        align-items: center;
         padding: 0 $item-padding-aside;
         font-size: 16px;
         line-height: 24px;
@@ -60,6 +64,10 @@ $item-padding-aside: 24px;
 
         &--active {
             background-color: $neutral3-1;
+
+        & > img {
+            margin-right: 10px;
+            border-radius: 10px;
         }
     }
 }

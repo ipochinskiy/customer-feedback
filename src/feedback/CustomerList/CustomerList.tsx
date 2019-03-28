@@ -82,13 +82,14 @@ class CustomerList extends Component<PropTypes, State> {
                 </div>
                 <div className='CustomerList__content'>
                     {customerForm}
-                    {customerList.map((customer: Customer) =>
+                    {customerList.map((customer: Customer, index: number) =>
                         <NavLink
                             key={customer.id}
                             to={`/customers/${customer.id}`}
                             className='CustomerList__link'
                             activeClassName='CustomerList__link--active'
                         >
+                            <img src={`http://lorempixel.com/50/50/cats/${index + 1}`}/>
                             {customer.name}
                         </NavLink>
                     )}
