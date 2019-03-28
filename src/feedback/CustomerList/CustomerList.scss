@@ -59,11 +59,12 @@ $item-height: 60px;
         color: $neutral3-5;
 
         &:hover {
-            background-color: $neutral3-1;
+            background-color: $neutral3;
         }
 
         &--active {
-            background-color: $neutral3-1;
+            background-color: $neutral3;
+        }
 
         & > img {
             margin-right: 10px;
