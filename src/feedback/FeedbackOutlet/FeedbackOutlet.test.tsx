@@ -13,6 +13,16 @@ describe('Component: FeedbackOutlet', () => {
     let props: ComponentProps;
     let component: ShallowWrapper;
 
+    it('should dispatch "feedbackLoaded"', () => {
+        const props = createComponentProps();
+
+        shallow(<FeedbackOutlet {...props} />);
+
+        expect(props.feedbackLoaded)
+            .toHaveBeenCalledTimes(1)
+            .toHaveBeenCalledWith();
+    });
+
     describe('when "match.params.customerId" is set', () => {
         beforeEach(() => {
             props = createComponentProps();
@@ -104,6 +114,7 @@ describe('Component: FeedbackOutlet', () => {
 
 function createComponentProps(options = {}): ComponentProps {
     return {
+        feedbackLoaded: jest.fn(),
         history: {
             push: jest.fn(),
         } as any,

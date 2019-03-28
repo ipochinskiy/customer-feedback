@@ -13,7 +13,10 @@ import {
 import { Customer } from '../_domain/Customer';
 import { Feedback } from '../_domain/Feedback';
 import { StoreState } from '../_domain/StoreState';
-import { ActionTypes } from '../actions';
+import {
+    ActionTypes,
+    feedbackLoaded,
+} from '../actions';
 import CustomerList from '../CustomerList/CustomerList';
 import FeedbackList from '../FeedbackList/FeedbackList';
 
@@ -26,12 +29,17 @@ interface PropsFromState {
 }
 
 interface PropsFromDispatch {
-    appLoaded: () => void;
+    feedbackLoaded: () => void;
 }
 
 export type ComponentProps = RouteComponentProps<PropsFromRouter> & PropsFromState & PropsFromDispatch;
 
 export class FeedbackOutlet extends Component<ComponentProps> {
+    componentDidMount() {
+        const { feedbackLoaded } = this.props;
+        feedbackLoaded();
+    }
+
     render() {
         const customerList: Customer[] = [
             { id: 'iman', name: 'Iron Man', photo: 'http://lorempixel.com/50/50/cats/1' },
@@ -75,6 +83,7 @@ const mapStateToProps = (state: StoreState): PropsFromState => {
 
 const mapDisaptchToProps = (dispatch: Dispatch<ActionTypes>): PropsFromDispatch => {
     return {
+        feedbackLoaded: () => dispatch(feedbackLoaded()),
     };
 };
 
