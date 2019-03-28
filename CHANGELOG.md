@@ -1,3 +1,8 @@
+# 0.6.0 (2019-03-28)
+
+* add new customers
+* add new feedback items
+
 # 0.5.0 (2019-03-28)
 
 * load data from api
