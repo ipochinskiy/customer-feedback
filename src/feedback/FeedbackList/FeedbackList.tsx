@@ -73,7 +73,7 @@ class FeedbackList extends Component<PropTypes> {
             <div className='FeedbackList'>
                 <div className='FeedbackList__header'>
                     <div className='FeedbackList__title'>Feedback</div>
-                    <Button shape='neutral' onClick={this.toggleFeedbackFormVisibility}>Add feedback</Button>
+                    {!isFeedbackFormShown && <Button shape='neutral' onClick={this.toggleFeedbackFormVisibility}>Add feedback</Button>}
                 </div>
                 <div className='FeedbackList__content'>
                     {feedbackForm}

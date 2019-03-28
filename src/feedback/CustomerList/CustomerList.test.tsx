@@ -60,15 +60,9 @@ describe('Component: CustomerList', () => {
                 .toHaveProp('placeholder', 'New customer');
         });
 
-        describe('and after clicking this button again', () => {
-            beforeEach(() => {
-                component.find('Button').simulate('click');
-            });
+        it('should hide the Button', () => {
 
-            it('should not render the input field anymore', () => {
-
-                expect(component.find('input')).not.toExist();
-            });
+            expect(component.find('Button')).not.toExist();
         });
 
         describe('and after submitting an empty field (with falsy event)', () => {

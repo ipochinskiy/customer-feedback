@@ -79,7 +79,7 @@ class CustomerList extends Component<PropTypes, State> {
             <div className='CustomerList'>
                 <div className='CustomerList__header'>
                     <div className='CustomerList__title'>Customers</div>
-                    <Button shape='primary' onClick={this.toggleCustomerFormVisibility}>Add customer</Button>
+                    {!isCustomerFormShow && <Button shape='primary' onClick={this.toggleCustomerFormVisibility}>Add customer</Button>}
                 </div>
                 <div className='CustomerList__content'>
                     {customerForm}
