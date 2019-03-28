@@ -62,6 +62,7 @@ class FeedbackList extends Component<PropTypes> {
                 <input
                     className='FeedbackList__input'
                     maxLength={140}
+                    placeholder='New feedback'
                     onChange={this.changeNewFeedbackText}
                 />
             </form>;

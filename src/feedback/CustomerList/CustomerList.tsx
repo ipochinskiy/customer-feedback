@@ -68,6 +68,7 @@ class CustomerList extends Component<PropTypes, State> {
                 <input
                     className='CustomerList__item'
                     maxLength={40}
+                    placeholder='New customer'
                     onChange={this.changeNewCustomerName}
                 />
             </form>;

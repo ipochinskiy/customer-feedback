@@ -55,7 +55,8 @@ describe('Component: CustomerList', () => {
 
             expect(component.find('input'))
                 .toExist()
-                .toHaveProp('maxLength', 40);
+                .toHaveProp('maxLength', 40)
+                .toHaveProp('placeholder', 'New customer');
         });
 
         describe('and after clicking this button again', () => {

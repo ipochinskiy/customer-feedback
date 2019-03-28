@@ -45,7 +45,8 @@ describe('Component: FeedbackList', () => {
 
             expect(component.find('input'))
                 .toExist()
-                .toHaveProp('maxLength', 140);
+                .toHaveProp('maxLength', 140)
+                .toHaveProp('placeholder', 'New feedback');
         });
 
         describe('and after clicking this button again', () => {
