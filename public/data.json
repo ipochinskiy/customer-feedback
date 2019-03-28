@@ -1,0 +1,42 @@
+[
+    {
+        "id": "iman",
+        "name": "Iron Man",
+        "photo": "http://lorempixel.com/50/50/cats/1",
+        "feedbackList": []
+    },
+    {
+        "id": "cap",
+        "name": "Captain America",
+        "photo": "http://lorempixel.com/50/50/cats/2",
+        "feedbackList": [
+            {
+                "id": "1",
+                "text": "It would be great if we would see all statistics on one place"
+            },
+            {
+                "id": "2",
+                "text": "We want to be able to invite people from outside"
+            }
+        ]
+    },
+    {
+        "id": "hul",
+        "name": "Hulk",
+        "photo": "http://lorempixel.com/50/50/cats/3",
+        "feedbackList": [
+            {
+                "id": "1",
+                "text": "It would be great if we would see all statistics on one place"
+            },
+            {
+                "id": "2",
+                "text": "We want to be able to invite people from outside"
+            },
+            {
+                "id": "3",
+                "text": "Color scheme needs some adjustments"
+            }
+        ]
+    }
+]

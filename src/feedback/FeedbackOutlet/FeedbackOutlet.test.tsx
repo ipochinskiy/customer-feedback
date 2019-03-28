@@ -3,16 +3,25 @@ import {
     ShallowWrapper,
 } from 'enzyme';
 import React from 'react';
-import { RouteComponentProps } from 'react-router';
 
 import {
+    ComponentProps,
     FeedbackOutlet,
-    PropTypes,
 } from './FeedbackOutlet';
 
 describe('Component: FeedbackOutlet', () => {
-    let props: RouteComponentProps<PropTypes>;
+    let props: ComponentProps;
     let component: ShallowWrapper;
+
+    it('should dispatch "feedbackLoaded"', () => {
+        const props = createComponentProps();
+
+        shallow(<FeedbackOutlet {...props} />);
+
+        expect(props.feedbackLoaded)
+            .toHaveBeenCalledTimes(1)
+            .toHaveBeenCalledWith();
+    });
 
     describe('when "match.params.customerId" is set', () => {
         beforeEach(() => {
@@ -103,8 +112,33 @@ describe('Component: FeedbackOutlet', () => {
     });
 });
 
-function createComponentProps(options = {}): RouteComponentProps<PropTypes> {
+function createComponentProps(options = {}): ComponentProps {
     return {
+        customerList: [
+            {
+                id: 'iman',
+                name: 'Iron Man',
+                photo: 'i/am/smart',
+                feedbackList: [
+                    { id: 'first-feedback', text: 'It would be great if we would see all statistics on one place' },
+                    { id: 'second-one', text: 'We want to be able to invite people from outside' },
+                    { id: 'yet-another-one', text: 'Color scheme needs some adjustments' },
+                ],
+            },
+            {
+                id: 'cap',
+                name: 'Captain America',
+                photo: 'i/am/brave',
+                feedbackList: [],
+            },
+            {
+                id: 'hulk',
+                name: 'Hulk',
+                photo: 'i/am/strong',
+                feedbackList: [],
+            },
+        ],
+        feedbackLoaded: jest.fn(),
         history: {
             push: jest.fn(),
         } as any,
@@ -115,5 +149,5 @@ function createComponentProps(options = {}): RouteComponentProps<PropTypes> {
             },
         },
         ...options,
-    } as RouteComponentProps<PropTypes>;
+    } as unknown as ComponentProps;
 }
