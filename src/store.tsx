@@ -4,7 +4,12 @@ import {
     createStore,
 } from 'redux';
 
-import { StoreState as FeedbackStoreState } from './feedback';
+import createSagaMiddleware from '@redux-saga/core';
+
+import {
+    feedbackSaga,
+    StoreState as FeedbackStoreState,
+} from './feedback';
 import { reducer } from './reducer';
 
 interface StoreState {
@@ -22,7 +27,11 @@ const logger = (store: any) => (next: any) => (action: Action) => {
     return result;
 }
 
+const sagaMiddleware = createSagaMiddleware();
+
 export const store = createStore<StoreState, any, any, any>(
     reducer,
-    applyMiddleware(logger),
+    applyMiddleware(logger, sagaMiddleware),
 );
+
+sagaMiddleware.run(feedbackSaga);
