@@ -15,6 +15,7 @@ import {
     ActionTypes,
     feedbackLoaded,
     newCustomerAddStarted,
+    newFeedbackAddStarted,
 } from '../actions';
 import CustomerList from '../CustomerList/CustomerList';
 import FeedbackList from '../FeedbackList/FeedbackList';
@@ -31,7 +32,7 @@ interface PropsFromState {
 interface PropsFromDispatch {
     feedbackLoaded: () => void;
     newCustomerAddStarted: (newCustomerName: string) => void;
-    newFeedbackAddStarted: (newFeedbackText: string, customerId: string) => void;
+    newFeedbackAddStarted: (text: string, customerId: string) => void;
 }
 
 export type ComponentProps = RouteComponentProps<PropsFromRouter> & PropsFromState & PropsFromDispatch;
@@ -96,7 +97,7 @@ const mapDisaptchToProps = (dispatch: Dispatch<ActionTypes>): PropsFromDispatch 
     return {
         feedbackLoaded: () => dispatch(feedbackLoaded()),
         newCustomerAddStarted: (newCustomerName: string) => dispatch(newCustomerAddStarted(newCustomerName)),
-        newFeedbackAddStarted: (newFeedbackText: string, customerId: string) => console.log(newFeedbackText, customerId),
+        newFeedbackAddStarted: (text: string, customerId: string) => dispatch(newFeedbackAddStarted(text, customerId)),
     };
 };
 
