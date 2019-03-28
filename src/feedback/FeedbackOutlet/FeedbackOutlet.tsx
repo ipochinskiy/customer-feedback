@@ -31,6 +31,7 @@ interface PropsFromState {
 interface PropsFromDispatch {
     feedbackLoaded: () => void;
     newCustomerAddStarted: (newCustomerName: string) => void;
+    newFeedbackAddStarted: (newFeedbackText: string, customerId: string) => void;
 }
 
 export type ComponentProps = RouteComponentProps<PropsFromRouter> & PropsFromState & PropsFromDispatch;
@@ -52,6 +53,11 @@ export class FeedbackOutlet extends Component<ComponentProps> {
         newCustomerAddStarted(newCustomerName);
     }
 
+    addFeedback(newFeedbackText: string, customerId: string) {
+        const { newFeedbackAddStarted } = this.props;
+        newFeedbackAddStarted(newFeedbackText, customerId);
+    }
+
     render() {
         const { match, customerList } = this.props;
 
@@ -62,7 +68,7 @@ export class FeedbackOutlet extends Component<ComponentProps> {
             const feedbackList = customer && customer.feedbackList || [];
             rightColumn = (
                 <div className='FeedbackOutlet__column'>
-                    <FeedbackList feedbackList={feedbackList} />
+                    <FeedbackList feedbackList={feedbackList} addFeedback={text => this.addFeedback(text, customerId)} />
                 </div>
             );
         } else {
@@ -90,6 +96,7 @@ const mapDisaptchToProps = (dispatch: Dispatch<ActionTypes>): PropsFromDispatch 
     return {
         feedbackLoaded: () => dispatch(feedbackLoaded()),
         newCustomerAddStarted: (newCustomerName: string) => dispatch(newCustomerAddStarted(newCustomerName)),
+        newFeedbackAddStarted: (newFeedbackText: string, customerId: string) => console.log(newFeedbackText, customerId),
     };
 };
 

@@ -109,6 +109,8 @@ describe('Component: FeedbackOutlet', () => {
 
     describe('when CustomerList calls "addCustomer" prop', () => {
         beforeEach(() => {
+            props = createComponentProps();
+            component = shallow(<FeedbackOutlet {...props} />);
             (component.find('CustomerList').prop('addCustomer') as Function)('Captain Marvel');
         });
 
@@ -117,6 +119,21 @@ describe('Component: FeedbackOutlet', () => {
             expect(props.newCustomerAddStarted)
                 .toHaveBeenCalledTimes(1)
                 .toHaveBeenCalledWith('Captain Marvel');
+        });
+    });
+
+    describe('when FeedbackList calls "addFeedback" prop', () => {
+        beforeEach(() => {
+            props = createComponentProps();
+            component = shallow(<FeedbackOutlet {...props} />);
+            (component.find('FeedbackList').prop('addFeedback') as Function)(`Well, it's pretty embarassing`);
+        });
+
+        it('should call "newFeedbackAddStarted" prop with current "customerId"', () => {
+
+            expect(props.newFeedbackAddStarted)
+                .toHaveBeenCalledTimes(1)
+                .toHaveBeenCalledWith(`Well, it's pretty embarassing`, 'iman');
         });
     });
 });
@@ -149,6 +166,7 @@ function createComponentProps(options = {}): ComponentProps {
         ],
         feedbackLoaded: jest.fn(),
         newCustomerAddStarted: jest.fn(),
+        newFeedbackAddStarted: jest.fn(),
         history: {
             push: jest.fn(),
         } as unknown as any,

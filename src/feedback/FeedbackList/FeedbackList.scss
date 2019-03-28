@@ -4,6 +4,7 @@
 $title-height: 32px;
 $title-padding: 16px;
 $content-padding-bottom: 24px;
+$item-padding-aside: 24px;
 
 .FeedbackList {
     &__header {
@@ -33,9 +34,20 @@ $content-padding-bottom: 24px;
         }
     }
 
+    &__input {
+        display: block;
+        width: calc(100% - #{$item-padding-aside * 2});
+        outline: none;
+        border: none;
+        padding: 0 $item-padding-aside;
+        font-size: 16px;
+        line-height: 24px;
+        color: $neutral3-5;
+    }
+
     &__item {
         display: block;
-        padding: 0 24px;
+        padding: 0 $item-padding-aside;
         font-size: 16px;
         line-height: 24px;
         cursor: pointer;
