@@ -62,7 +62,7 @@ export class FeedbackOutlet extends Component<ComponentProps> {
             const feedbackList = customer && customer.feedbackList || [];
             rightColumn = (
                 <div className='FeedbackOutlet__column'>
-                    <FeedbackList title='Feedback' feedbackList={feedbackList} />
+                    <FeedbackList feedbackList={feedbackList} />
                 </div>
             );
         } else {

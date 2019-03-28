@@ -31,7 +31,6 @@ describe('Component: FeedbackList', () => {
 
 function createComponentProps(options = {}): PropTypes {
     return {
-        title: 'Feedback',
         feedbackList: [
             { id: 'first one', text: 'I have a problem' },
             { id: 'second one', text: 'A terrible one' },

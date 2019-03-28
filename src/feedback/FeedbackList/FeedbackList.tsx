@@ -5,18 +5,17 @@ import React, { Component } from 'react';
 import { Feedback } from '../_domain/Feedback';
 
 export interface PropTypes {
-    title: string;
     feedbackList: Feedback[];
 }
 
 class FeedbackList extends Component<PropTypes> {
     render() {
-        const { title, feedbackList } = this.props;
+        const { feedbackList } = this.props;
 
         return (
             <div className='FeedbackList'>
                 <div className='FeedbackList__header'>
-                    <div className='FeedbackList__title'>{title}</div>
+                    <div className='FeedbackList__title'>Feedback</div>
                 </div>
                 <div className='FeedbackList__content'>
                     {feedbackList.map((item: Feedback) =>
