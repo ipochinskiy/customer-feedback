@@ -32,7 +32,6 @@ describe('Component: FeedbackOutlet', () => {
         it('should render customer list', () => {
 
             expect(component.find('CustomerList').props()).toMatchObject({
-                title: 'Customers',
                 customerList: expect.arrayContaining([
                     expect.objectContaining({ id: 'iman', name: 'Iron Man' }),
                     expect.objectContaining({ id: 'cap', name: 'Captain America' }),
@@ -44,7 +43,6 @@ describe('Component: FeedbackOutlet', () => {
         it('should render customer list', () => {
 
             expect(component.find('FeedbackList').props()).toMatchObject({
-                title: 'Feedback',
                 feedbackList: expect.arrayContaining([
                     expect.objectContaining({ id: 'first-feedback', text: 'It would be great if we would see all statistics on one place' }),
                     expect.objectContaining({ id: 'second-one', text: 'We want to be able to invite people from outside' }),
@@ -75,9 +73,7 @@ describe('Component: FeedbackOutlet', () => {
 
         it('should not render the feedback list', () => {
 
-            expect(component.find('CustomerList'))
-                .toHaveLength(1)
-                .toHaveProp('title', 'Customers');
+            expect(component.find('FeedbackList')).not.toExist();
         });
     });
 
@@ -110,6 +106,36 @@ describe('Component: FeedbackOutlet', () => {
             expect(component).toIncludeText('Please select a customer');
         });
     });
+
+    describe('when CustomerList calls "addCustomer" prop', () => {
+        beforeEach(() => {
+            props = createComponentProps();
+            component = shallow(<FeedbackOutlet {...props} />);
+            (component.find('CustomerList').prop('addCustomer') as Function)('Captain Marvel');
+        });
+
+        it('should call "newCustomerAddStarted" prop', () => {
+
+            expect(props.newCustomerAddStarted)
+                .toHaveBeenCalledTimes(1)
+                .toHaveBeenCalledWith('Captain Marvel');
+        });
+    });
+
+    describe('when FeedbackList calls "addFeedback" prop', () => {
+        beforeEach(() => {
+            props = createComponentProps();
+            component = shallow(<FeedbackOutlet {...props} />);
+            (component.find('FeedbackList').prop('addFeedback') as Function)(`Well, it's pretty embarassing`);
+        });
+
+        it('should call "newFeedbackAddStarted" prop with current "customerId"', () => {
+
+            expect(props.newFeedbackAddStarted)
+                .toHaveBeenCalledTimes(1)
+                .toHaveBeenCalledWith(`Well, it's pretty embarassing`, 'iman');
+        });
+    });
 });
 
 function createComponentProps(options = {}): ComponentProps {
@@ -139,15 +165,17 @@ function createComponentProps(options = {}): ComponentProps {
             },
         ],
         feedbackLoaded: jest.fn(),
+        newCustomerAddStarted: jest.fn(),
+        newFeedbackAddStarted: jest.fn(),
         history: {
             push: jest.fn(),
-        } as any,
-        location: {},
+        } as unknown as any,
+        location: {} as unknown as any,
         match: {
             params: {
                 customerId: 'iman',
             },
-        },
+        } as unknown as any,
         ...options,
-    } as unknown as ComponentProps;
+    } as ComponentProps;
 }

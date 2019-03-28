@@ -14,6 +14,8 @@ import { Customer } from '../_domain/Customer';
 import {
     ActionTypes,
     feedbackLoaded,
+    newCustomerAddStarted,
+    newFeedbackAddStarted,
 } from '../actions';
 import CustomerList from '../CustomerList/CustomerList';
 import FeedbackList from '../FeedbackList/FeedbackList';
@@ -29,14 +31,32 @@ interface PropsFromState {
 
 interface PropsFromDispatch {
     feedbackLoaded: () => void;
+    newCustomerAddStarted: (newCustomerName: string) => void;
+    newFeedbackAddStarted: (text: string, customerId: string) => void;
 }
 
 export type ComponentProps = RouteComponentProps<PropsFromRouter> & PropsFromState & PropsFromDispatch;
 
 export class FeedbackOutlet extends Component<ComponentProps> {
+    constructor(props: ComponentProps) {
+        super(props);
+
+        this.addCustomer = this.addCustomer.bind(this);
+    }
+
     componentDidMount() {
         const { feedbackLoaded } = this.props;
         feedbackLoaded();
+    }
+
+    addCustomer(newCustomerName: string) {
+        const { newCustomerAddStarted } = this.props;
+        newCustomerAddStarted(newCustomerName);
+    }
+
+    addFeedback(newFeedbackText: string, customerId: string) {
+        const { newFeedbackAddStarted } = this.props;
+        newFeedbackAddStarted(newFeedbackText, customerId);
     }
 
     render() {
@@ -49,7 +69,7 @@ export class FeedbackOutlet extends Component<ComponentProps> {
             const feedbackList = customer && customer.feedbackList || [];
             rightColumn = (
                 <div className='FeedbackOutlet__column'>
-                    <FeedbackList title='Feedback' feedbackList={feedbackList} />
+                    <FeedbackList feedbackList={feedbackList} addFeedback={text => this.addFeedback(text, customerId)} />
                 </div>
             );
         } else {
@@ -59,7 +79,7 @@ export class FeedbackOutlet extends Component<ComponentProps> {
         return (
             <div className='FeedbackOutlet'>
                 <div className='FeedbackOutlet__column'>
-                    <CustomerList title='Customers' customerList={customerList} />
+                    <CustomerList customerList={customerList} addCustomer={this.addCustomer}/>
                 </div>
                 {rightColumn}
             </div>
@@ -76,6 +96,8 @@ const mapStateToProps = (state: any): PropsFromState => {
 const mapDisaptchToProps = (dispatch: Dispatch<ActionTypes>): PropsFromDispatch => {
     return {
         feedbackLoaded: () => dispatch(feedbackLoaded()),
+        newCustomerAddStarted: (newCustomerName: string) => dispatch(newCustomerAddStarted(newCustomerName)),
+        newFeedbackAddStarted: (text: string, customerId: string) => dispatch(newFeedbackAddStarted(text, customerId)),
     };
 };
 

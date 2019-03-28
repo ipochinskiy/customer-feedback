@@ -4,6 +4,7 @@
 $title-height: 32px;
 $title-padding: 16px;
 $content-padding-bottom: 24px;
+$item-padding-aside: 24px;
 
 .CustomerList {
     &__header {
@@ -35,7 +36,18 @@ $content-padding-bottom: 24px;
 
     &__item {
         display: block;
-        padding: 0 24px;
+        width: calc(100% - #{$item-padding-aside * 2});
+        outline: none;
+        border: none;
+        padding: 0 $item-padding-aside;
+        font-size: 16px;
+        line-height: 24px;
+        color: $neutral3-5;
+    }
+
+    &__link {
+        display: block;
+        padding: 0 $item-padding-aside;
         font-size: 16px;
         line-height: 24px;
         cursor: pointer;
