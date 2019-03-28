@@ -1,7 +1,10 @@
 import { combineReducers } from 'redux';
 
-import { reducer as feedbackReducer } from './feedback';
+import {
+    FEEDBACK_FEATURE,
+    reducer as feedbackReducer,
+} from './feedback';
 
 export const reducer = combineReducers({
-    feedback: feedbackReducer,
+    [ FEEDBACK_FEATURE ]: feedbackReducer,
 });

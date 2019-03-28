@@ -5,6 +5,8 @@ import {
     CustomerListLoadedAction,
 } from './actions';
 
+export const FEEDBACK_FEATURE = 'feedback';
+
 const defaultState: StoreState = {
     customerList: [],
 };
