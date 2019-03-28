@@ -69,6 +69,7 @@ class CustomerList extends Component<PropTypes, State> {
                     className='CustomerList__item'
                     maxLength={40}
                     placeholder='New customer'
+                    autoFocus
                     onChange={this.changeNewCustomerName}
                 />
             </form>;

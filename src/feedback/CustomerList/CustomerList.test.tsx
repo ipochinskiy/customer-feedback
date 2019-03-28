@@ -56,6 +56,7 @@ describe('Component: CustomerList', () => {
             expect(component.find('input'))
                 .toExist()
                 .toHaveProp('maxLength', 40)
+                .toHaveProp('autoFocus')
                 .toHaveProp('placeholder', 'New customer');
         });
 

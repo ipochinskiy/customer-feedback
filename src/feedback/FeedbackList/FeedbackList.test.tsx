@@ -46,6 +46,7 @@ describe('Component: FeedbackList', () => {
             expect(component.find('input'))
                 .toExist()
                 .toHaveProp('maxLength', 140)
+                .toHaveProp('autoFocus')
                 .toHaveProp('placeholder', 'New feedback');
         });
 
