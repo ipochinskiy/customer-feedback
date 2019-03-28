@@ -1,3 +1,7 @@
+# 0.5.0 (2019-03-28)
+
+* load data from api
+
 # 0.4.1 (2019-03-27)
 
 * fix title parameter in tests for FeedbackOutlet
