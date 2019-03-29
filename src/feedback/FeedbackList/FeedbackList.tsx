@@ -71,7 +71,7 @@ class FeedbackList extends Component<PropTypes> {
 
         const emptyState = <div className='FeedbackList__empty'>
             <div className='FeedbackList__empty__icon'><FontAwesomeIcon icon={faHandSpock} /></div>
-            <div className='FeedbackList__empty__text'>This custom has left no feedback yet</div>
+            <div className='FeedbackList__empty__text'>This customer has left no feedback yet</div>
         </div>;
 
         const content = <div className='FeedbackList__content'>

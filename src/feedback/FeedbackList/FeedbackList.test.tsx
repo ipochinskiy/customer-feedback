@@ -30,7 +30,7 @@ describe('Component: FeedbackList', () => {
 
         it('should render empty state', () => {
 
-            expect(component).toIncludeText('This custom has left no feedback yet');
+            expect(component).toIncludeText('This customer has left no feedback yet');
         });
     });
 
