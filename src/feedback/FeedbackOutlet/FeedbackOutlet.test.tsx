@@ -23,7 +23,7 @@ describe('Component: FeedbackOutlet', () => {
             .toHaveBeenCalledWith();
     });
 
-    describe('when "match.params.customerId" is set', () => {
+    describe('when "match.params.customerId" is set (normal)', () => {
         beforeEach(() => {
             props = createComponentProps();
             component = shallow(<FeedbackOutlet {...props} />);
@@ -49,6 +49,24 @@ describe('Component: FeedbackOutlet', () => {
                     expect.objectContaining({ id: 'yet-another-one', text: 'Color scheme needs some adjustments' }),
                 ]),
             });
+        });
+    });
+
+    describe('when "match.params.customerId" is set (not existing id)', () => {
+        beforeEach(() => {
+            props = createComponentProps({
+                match: {
+                    params: {
+                        customerId: 'hawk',
+                    },
+                },
+            });
+            component = shallow(<FeedbackOutlet {...props} />);
+        });
+
+        it('should redirect to the "/customers" url', () => {
+
+            expect(component.find('Redirect')).toHaveProp('to', '/customers');
         });
     });
 
