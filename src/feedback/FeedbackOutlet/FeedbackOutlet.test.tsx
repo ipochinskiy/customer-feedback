@@ -40,7 +40,7 @@ describe('Component: FeedbackOutlet', () => {
             });
         });
 
-        it('should render customer list', () => {
+        it('should render feedback list', () => {
 
             expect(component.find('FeedbackList').props()).toMatchObject({
                 feedbackList: expect.arrayContaining([
@@ -48,6 +48,7 @@ describe('Component: FeedbackOutlet', () => {
                     expect.objectContaining({ id: 'second-one', text: 'We want to be able to invite people from outside' }),
                     expect.objectContaining({ id: 'yet-another-one', text: 'Color scheme needs some adjustments' }),
                 ]),
+                customer: expect.objectContaining({ id: 'iman', name: 'Iron Man' }),
             });
         });
     });

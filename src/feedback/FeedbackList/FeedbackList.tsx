@@ -9,10 +9,12 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Button } from '../../ui-components';
+import { Customer } from '../_domain/Customer';
 import { Feedback } from '../_domain/Feedback';
 
 export interface PropTypes {
     feedbackList: Feedback[];
+    customer: Customer;
     addFeedback: (text: string) => void,
 }
 
@@ -59,8 +61,10 @@ class FeedbackList extends Component<PropTypes> {
     }
 
     render() {
-        const { feedbackList } = this.props;
+        const { feedbackList, customer } = this.props;
         const { isFeedbackFormShown } = this.state;
+
+        const customerName = customer && customer.name || 'This customer';
 
         const feedbackForm = <form onSubmit={this.addFeedback}>
             <input
@@ -74,7 +78,7 @@ class FeedbackList extends Component<PropTypes> {
 
         const emptyState = <div className='FeedbackList__empty'>
             <div className='FeedbackList__empty__icon'><FontAwesomeIcon icon={faHandSpock} /></div>
-            <div className='FeedbackList__empty__text'>This customer has left no feedback yet</div>
+            <div className='FeedbackList__empty__text'>{customerName} has left no feedback yet</div>
         </div>;
 
         const content = <div className='FeedbackList__content'>
@@ -96,7 +100,7 @@ class FeedbackList extends Component<PropTypes> {
         return (
             <div className='FeedbackList'>
                 <div className='FeedbackList__header'>
-                    <div className='FeedbackList__title'>Feedback</div>
+                    <div className='FeedbackList__title'>{customerName}'s feedback</div>
                     {isFeedbackFormShown ? closeButton : addButton}
                 </div>
                 {isFeedbackFormShown ? feedbackForm : null}

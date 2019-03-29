@@ -4,6 +4,7 @@ import {
 } from 'enzyme';
 import React from 'react';
 
+import { Customer } from '../_domain/Customer';
 import FeedbackList, { PropTypes } from './FeedbackList';
 
 describe('Component: FeedbackList', () => {
@@ -15,9 +16,23 @@ describe('Component: FeedbackList', () => {
         component = shallow(<FeedbackList {...props} />);
     });
 
-    it('should render the title', () => {
+    it('should render the default title', () => {
 
-        expect(component).toIncludeText('Feedback');
+        expect(component).toIncludeText(`This customer's feedback`);
+    });
+
+    describe('with a customer set', () => {
+        beforeEach(() => {
+            props = createComponentProps({
+                customer: { name: 'Hawkeye' },
+            });
+            component = shallow(<FeedbackList {...props} />);
+        });
+
+        it('should render the title related to this customer', () => {
+
+            expect(component).toIncludeText(`Hawkeye's feedback`);
+        });
     });
 
     describe('with an empty list', () => {
@@ -31,6 +46,21 @@ describe('Component: FeedbackList', () => {
         it('should render empty state', () => {
 
             expect(component).toIncludeText('This customer has left no feedback yet');
+        });
+
+        describe('with a customer set', () => {
+            beforeEach(() => {
+                props = createComponentProps({
+                    feedbackList: [],
+                    customer: { name: 'Hawkeye' },
+                });
+                component = shallow(<FeedbackList {...props} />);
+            });
+
+            it('should render the empty state related to this customer', () => {
+
+                expect(component).toIncludeText('Hawkeye has left no feedback yet');
+            });
         });
     });
 
@@ -177,6 +207,7 @@ function createComponentProps(options = {}): PropTypes {
             { id: 'second one', text: 'A terrible one' },
             { id: 'third one', text: 'Yet another huge and fat one' },
         ],
+        customer: null as unknown as Customer,
         addFeedback: jest.fn(),
         ...options,
     };
