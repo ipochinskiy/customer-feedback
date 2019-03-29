@@ -72,4 +72,19 @@ $item-height: 60px;
             border-radius: 10px;
         }
     }
+
+    &__empty {
+        margin-top: 48px;
+        text-align: center;
+        color: $neutral3-5;
+
+        &__icon {
+            font-size: 100px;
+        }
+
+        &__text {
+            margin-top: 24px;
+            font-size: 40px;
+        }
+    }
 }

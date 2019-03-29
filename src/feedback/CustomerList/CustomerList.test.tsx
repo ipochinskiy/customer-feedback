@@ -20,21 +20,42 @@ describe('Component: CustomerList', () => {
         expect(component).toIncludeText('Customers');
     });
 
-    it('should not render an input field', () => {
+    describe('with an empty list', () => {
+        beforeEach(() => {
+            props = createComponentProps({
+                customerList: [],
+            });
+            component = shallow(<CustomerList {...props} />);
+        });
 
-        expect(component.find('input')).not.toExist();
+        it('should not render an input field', () => {
+
+            expect(component.find('input')).not.toExist();
+        });
+
+        it('should render empty state', () => {
+
+            expect(component).toIncludeText('There are no customers yet');
+        });
     });
 
-    it('should render the values', () => {
+    describe('with a few items in the list', () => {
+        it('should not render an input field', () => {
 
-        expect(component.find('NavLink').at(0).props()).toMatchObject({
-            to: '/customers/iman',
+            expect(component.find('input')).not.toExist();
         });
-        expect(component.find('NavLink').at(1).props()).toMatchObject({
-            to: '/customers/cap',
-        });
-        expect(component.find('NavLink').at(2).props()).toMatchObject({
-            to: '/customers/hulk',
+
+        it('should render the values', () => {
+
+            expect(component.find('NavLink').at(0).props()).toMatchObject({
+                to: '/customers/iman',
+            });
+            expect(component.find('NavLink').at(1).props()).toMatchObject({
+                to: '/customers/cap',
+            });
+            expect(component.find('NavLink').at(2).props()).toMatchObject({
+                to: '/customers/hulk',
+            });
         });
     });
 
