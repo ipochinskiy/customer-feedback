@@ -55,4 +55,18 @@ $item-padding-aside: 24px;
         text-decoration: none;
         color: $neutral3-5;
     }
+
+    &__empty {
+        text-align: center;
+        color: $neutral3-5;
+
+        &__icon {
+            font-size: 100px;
+        }
+
+        &__text {
+            margin-top: 24px;
+            font-size: 40px;
+        }
+    }
 }

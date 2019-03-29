@@ -2,6 +2,9 @@ import './FeedbackList.scss';
 
 import React, { Component } from 'react';
 
+import { faHandSpock } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Button } from '../../ui-components';
 import { Feedback } from '../_domain/Feedback';
 
@@ -56,18 +59,28 @@ class FeedbackList extends Component<PropTypes> {
         const { feedbackList } = this.props;
         const { isFeedbackFormShown } = this.state;
 
-        let feedbackForm;
-        if (isFeedbackFormShown) {
-            feedbackForm = <form onSubmit={this.addFeedback}>
-                <input
-                    className='FeedbackList__input'
-                    maxLength={140}
-                    placeholder='New feedback'
-                    autoFocus
-                    onChange={this.changeNewFeedbackText}
-                />
-            </form>;
-        }
+        const feedbackForm = <form onSubmit={this.addFeedback}>
+            <input
+                className='FeedbackList__input'
+                maxLength={140}
+                placeholder='New feedback'
+                autoFocus
+                onChange={this.changeNewFeedbackText}
+            />
+        </form>;
+
+        const emptyState = <div className='FeedbackList__empty'>
+            <div className='FeedbackList__empty__icon'><FontAwesomeIcon icon={faHandSpock} /></div>
+            <div className='FeedbackList__empty__text'>This custom has left no feedback yet</div>
+        </div>;
+
+        const content = <div className='FeedbackList__content'>
+            {feedbackList.map((item: Feedback) =>
+                <div key={item.id} className='FeedbackList__item'>
+                    {item.text}
+                </div>
+            )}
+        </div>;
 
         return (
             <div className='FeedbackList'>
@@ -75,14 +88,8 @@ class FeedbackList extends Component<PropTypes> {
                     <div className='FeedbackList__title'>Feedback</div>
                     {!isFeedbackFormShown && <Button shape='neutral' onClick={this.toggleFeedbackFormVisibility}>Add feedback</Button>}
                 </div>
-                <div className='FeedbackList__content'>
-                    {feedbackForm}
-                    {feedbackList.map((item: Feedback) =>
-                        <div key={item.id} className='FeedbackList__item'>
-                            {item.text}
-                        </div>
-                    )}
-                </div>
+                {isFeedbackFormShown ? feedbackForm : null}
+                {feedbackList.length > 0 ? content : emptyState}
             </div>
         );
     }

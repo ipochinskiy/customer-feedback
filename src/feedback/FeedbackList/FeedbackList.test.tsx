@@ -20,12 +20,28 @@ describe('Component: FeedbackList', () => {
         expect(component).toIncludeText('Feedback');
     });
 
-    it('should render the values', () => {
+    describe('with an empty list', () => {
+        beforeEach(() => {
+            props = createComponentProps({
+                feedbackList: [],
+            });
+            component = shallow(<FeedbackList {...props} />);
+        });
 
-        expect(component)
-            .toIncludeText('I have a problem')
-            .toIncludeText('A terrible one')
-            .toIncludeText('Yet another huge and fat one');
+        it('should render empty state', () => {
+
+            expect(component).toIncludeText('This custom has left no feedback yet');
+        });
+    });
+
+    describe('with a few items in the list', () => {
+        it('should render the values', () => {
+
+            expect(component)
+                .toIncludeText('I have a problem')
+                .toIncludeText('A terrible one')
+                .toIncludeText('Yet another huge and fat one');
+        });
     });
 
     it('should render the button for adding new customers', () => {
