@@ -1,44 +1,39 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Customer Feedback
 
-## Available Scripts
+A tiny React application for gathering customers' feedback.
 
-In the project directory, you can run:
+## Design notes
 
-### `npm start`
+The client is **desktop-only** and was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses [Redux](https://redux.js.org/) for state management, [React Router](https://reacttraining.com/react-router/) for client-side routing and [Redux-Saga](https://redux-saga.js.org/) for communication with the "server" (see below).
 
-Runs the app in the development mode.<br>
+This project is written with [TypeScript](https://www.typescriptlang.org).
+
+Application is divided into 2 modules:
+- `ui-components` contains only presentational components which could be shared between other modules
+- `feedback` contains all the code relevant to the context "feedback"
+
+`feedback` Module contains presentational and container components for the context "feedback", as well as the interfaces used within this context, reducer, store, actions and sagas.
+
+Though the application does not communicate with a real server, it's built in the way which allows introducing one pretty fast: single thing which should be done is replacing the URLs used in sagas with URL of the real server and eventual adjusting of the results parsing.
+
+For testing the following tools are used:
+- test framework: [jest](https://jestjs.io)
+- react test lib: [enzyme](https://airbnb.io/enzyme/)
+- jest assertions for enzyme: [enzyme-matchers](https://github.com/FormidableLabs/enzyme-matchers)
+
+## How to run in the development mode
+
+Run `npm start` in the app folder.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `npm test`
+## How to build a production version
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
+Run `npm run build` in the app folder, which will build the app for production to the `build` folder.<br>
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## How to test application
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run `npm test` to launch the test runner in the interactive watch mode.<br>
