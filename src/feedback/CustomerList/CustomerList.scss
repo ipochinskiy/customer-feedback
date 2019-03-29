@@ -36,7 +36,7 @@ $item-height: 60px;
         }
     }
 
-    &__item {
+    &__input {
         display: block;
         width: calc(100% - #{$item-padding-aside * 2});
         height: $item-height;

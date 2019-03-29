@@ -66,7 +66,7 @@ class CustomerList extends Component<PropTypes, State> {
         if (isCustomerFormShow) {
             customerForm = <form onSubmit={this.addCustomer}>
                 <input
-                    className='CustomerList__item'
+                    className='CustomerList__input'
                     maxLength={40}
                     placeholder='New customer'
                     autoFocus
