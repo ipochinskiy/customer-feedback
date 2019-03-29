@@ -2,7 +2,10 @@ import './FeedbackList.scss';
 
 import React, { Component } from 'react';
 
-import { faHandSpock } from '@fortawesome/free-regular-svg-icons';
+import {
+    faHandSpock,
+    faTimesCircle,
+} from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Button } from '../../ui-components';
@@ -82,11 +85,19 @@ class FeedbackList extends Component<PropTypes> {
             )}
         </div>;
 
+        const addButton = <Button shape='neutral' onClick={this.toggleFeedbackFormVisibility}>
+            Add feedback
+        </Button>;
+
+        const closeButton = <div className='FeedbackList__icon' onClick={this.toggleFeedbackFormVisibility}>
+            <FontAwesomeIcon icon={faTimesCircle} />
+        </div>;
+
         return (
             <div className='FeedbackList'>
                 <div className='FeedbackList__header'>
                     <div className='FeedbackList__title'>Feedback</div>
-                    {!isFeedbackFormShown && <Button shape='neutral' onClick={this.toggleFeedbackFormVisibility}>Add feedback</Button>}
+                    {isFeedbackFormShown ? closeButton : addButton}
                 </div>
                 {isFeedbackFormShown ? feedbackForm : null}
                 {feedbackList.length > 0 ? content : emptyState}

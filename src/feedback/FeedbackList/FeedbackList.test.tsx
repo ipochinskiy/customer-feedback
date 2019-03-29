@@ -71,6 +71,32 @@ describe('Component: FeedbackList', () => {
             expect(component.find('Button')).not.toExist();
         });
 
+        it('should render a close icon', () => {
+
+            expect(component.find('FontAwesomeIcon')).toExist();
+        });
+
+        describe('and after click on this icon', () => {
+            beforeEach(() => {
+                component.find('.FeedbackList__icon').simulate('click');
+            });
+
+            it('should hide the input field', () => {
+
+                expect(component.find('input')).not.toExist();
+            });
+
+            it('should hide the close icon', () => {
+
+                expect(component.find('FontAwesomeIcon')).not.toExist();
+            });
+
+            it('should show the Button', () => {
+
+                expect(component.find('Button')).toExist();
+            });
+        });
+
         describe('and after submitting an empty field (with falsy event)', () => {
             beforeEach(() => {
                 component.find('form').simulate('submit');
