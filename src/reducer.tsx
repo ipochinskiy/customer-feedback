@@ -1,3 +1,5 @@
+import { connectRouter } from 'connected-react-router';
+import { History } from 'history';
 import { combineReducers } from 'redux';
 
 import {
@@ -5,6 +7,7 @@ import {
     reducer as feedbackReducer,
 } from './feedback';
 
-export const reducer = combineReducers({
+export const createReducer = (history: History) => combineReducers({
+    router: connectRouter(history),
     [ FEEDBACK_FEATURE ]: feedbackReducer,
 });
