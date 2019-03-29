@@ -3,7 +3,10 @@ import './CustomerList.scss';
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { faHandSpock } from '@fortawesome/free-regular-svg-icons';
+import {
+    faHandSpock,
+    faTimesCircle,
+} from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Button } from '../../ui-components';
@@ -94,11 +97,19 @@ class CustomerList extends Component<PropTypes, State> {
             )}
         </div>;
 
+        const addButton = <Button shape='primary' onClick={this.toggleCustomerFormVisibility}>
+            Add customer
+        </Button>;
+
+        const closeButton = <div className='CustomerList__icon' onClick={this.toggleCustomerFormVisibility}>
+            <FontAwesomeIcon icon={faTimesCircle} />
+        </div>;
+
         return (
             <div className='CustomerList'>
                 <div className='CustomerList__header'>
                     <div className='CustomerList__title'>Customers</div>
-                    {!isCustomerFormShow && <Button shape='primary' onClick={this.toggleCustomerFormVisibility}>Add customer</Button>}
+                    {isCustomerFormShow ? closeButton : addButton}
                 </div>
                 {isCustomerFormShow ? customerForm : null}
                 {customerList.length > 0 ? content : emptyState}

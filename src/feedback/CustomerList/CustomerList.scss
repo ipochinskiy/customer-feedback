@@ -87,4 +87,15 @@ $item-height: 60px;
             font-size: 40px;
         }
     }
+
+    &__icon {
+        font-size: 48px;
+        margin-right: 8px;
+        color: $neutral3-4;
+        cursor: pointer;
+
+        &:hover {
+            color: $neutral3-5;
+        }
+    }
 }
