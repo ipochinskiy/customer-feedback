@@ -2,11 +2,19 @@ import './FeedbackList.scss';
 
 import React, { Component } from 'react';
 
+import {
+    faHandSpock,
+    faTimesCircle,
+} from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Button } from '../../ui-components';
+import { Customer } from '../_domain/Customer';
 import { Feedback } from '../_domain/Feedback';
 
 export interface PropTypes {
     feedbackList: Feedback[];
+    customer: Customer;
     addFeedback: (text: string) => void,
 }
 
@@ -53,34 +61,50 @@ class FeedbackList extends Component<PropTypes> {
     }
 
     render() {
-        const { feedbackList } = this.props;
+        const { feedbackList, customer } = this.props;
         const { isFeedbackFormShown } = this.state;
 
-        let feedbackForm;
-        if (isFeedbackFormShown) {
-            feedbackForm = <form onSubmit={this.addFeedback}>
-                <input
-                    className='FeedbackList__input'
-                    maxLength={140}
-                    onChange={this.changeNewFeedbackText}
-                />
-            </form>;
-        }
+        const customerName = customer && customer.name || 'This customer';
+
+        const feedbackForm = <form onSubmit={this.addFeedback}>
+            <input
+                className='FeedbackList__input'
+                maxLength={140}
+                placeholder='New feedback'
+                autoFocus
+                onChange={this.changeNewFeedbackText}
+            />
+        </form>;
+
+        const emptyState = <div className='FeedbackList__empty'>
+            <div className='FeedbackList__empty__icon'><FontAwesomeIcon icon={faHandSpock} /></div>
+            <div className='FeedbackList__empty__text'>{customerName} has left no feedback yet</div>
+        </div>;
+
+        const content = <div className='FeedbackList__content'>
+            {feedbackList.map((item: Feedback) =>
+                <div key={item.id} className='FeedbackList__item'>
+                    {item.text}
+                </div>
+            )}
+        </div>;
+
+        const addButton = <Button shape='neutral' onClick={this.toggleFeedbackFormVisibility}>
+            Add feedback
+        </Button>;
+
+        const closeButton = <div className='FeedbackList__icon' onClick={this.toggleFeedbackFormVisibility}>
+            <FontAwesomeIcon icon={faTimesCircle} />
+        </div>;
 
         return (
             <div className='FeedbackList'>
                 <div className='FeedbackList__header'>
-                    <div className='FeedbackList__title'>Feedback</div>
-                    <Button shape='neutral' onClick={this.toggleFeedbackFormVisibility}>Add feedback</Button>
+                    <div className='FeedbackList__title'>{customerName}'s feedback</div>
+                    {isFeedbackFormShown ? closeButton : addButton}
                 </div>
-                <div className='FeedbackList__content'>
-                    {feedbackForm}
-                    {feedbackList.map((item: Feedback) =>
-                        <div key={item.id} className='FeedbackList__item'>
-                            {item.text}
-                        </div>
-                    )}
-                </div>
+                {isFeedbackFormShown ? feedbackForm : null}
+                {feedbackList.length > 0 ? content : emptyState}
             </div>
         );
     }

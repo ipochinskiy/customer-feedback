@@ -3,6 +3,12 @@ import './CustomerList.scss';
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import {
+    faHandSpock,
+    faTimesCircle,
+} from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { Button } from '../../ui-components';
 import { Customer } from '../_domain/Customer';
 
@@ -62,36 +68,51 @@ class CustomerList extends Component<PropTypes, State> {
         const { customerList } = this.props;
         const { isCustomerFormShow } = this.state;
 
-        let customerForm;
-        if (isCustomerFormShow) {
-            customerForm = <form onSubmit={this.addCustomer}>
-                <input
-                    className='CustomerList__item'
-                    maxLength={40}
-                    onChange={this.changeNewCustomerName}
-                />
-            </form>;
-        }
+        const customerForm = <form onSubmit={this.addCustomer}>
+            <input
+                className='CustomerList__input'
+                maxLength={40}
+                placeholder='New customer'
+                autoFocus
+                onChange={this.changeNewCustomerName}
+            />
+        </form>;
+
+        const emptyState = <div className='CustomerList__empty'>
+            <div className='CustomerList__empty__icon'><FontAwesomeIcon icon={faHandSpock} /></div>
+            <div className='CustomerList__empty__text'>There are no customers yet</div>
+        </div>;
+
+        const content = <div className='CustomerList__content'>
+            {customerList.map((customer: Customer, index: number) =>
+                <NavLink
+                    key={customer.id}
+                    to={`/customers/${customer.id}`}
+                    className='CustomerList__link'
+                    activeClassName='CustomerList__link--active'
+                >
+                    <img src={`http://lorempixel.com/50/50/cats/${index + 1}`} />
+                    {customer.name}
+                </NavLink>
+            )}
+        </div>;
+
+        const addButton = <Button shape='primary' onClick={this.toggleCustomerFormVisibility}>
+            Add customer
+        </Button>;
+
+        const closeButton = <div className='CustomerList__icon' onClick={this.toggleCustomerFormVisibility}>
+            <FontAwesomeIcon icon={faTimesCircle} />
+        </div>;
 
         return (
             <div className='CustomerList'>
                 <div className='CustomerList__header'>
                     <div className='CustomerList__title'>Customers</div>
-                    <Button shape='primary' onClick={this.toggleCustomerFormVisibility}>Add customer</Button>
+                    {isCustomerFormShow ? closeButton : addButton}
                 </div>
-                <div className='CustomerList__content'>
-                    {customerForm}
-                    {customerList.map((customer: Customer) =>
-                        <NavLink
-                            key={customer.id}
-                            to={`/customers/${customer.id}`}
-                            className='CustomerList__link'
-                            activeClassName='CustomerList__link--active'
-                        >
-                            {customer.name}
-                        </NavLink>
-                    )}
-                </div>
+                {isCustomerFormShow ? customerForm : null}
+                {customerList.length > 0 ? content : emptyState}
             </div>
         );
     }

@@ -1,3 +1,4 @@
+import { push } from 'connected-react-router';
 import {
     call,
     put,
@@ -16,6 +17,7 @@ export function* addCustomer(action: NewCustomerAddStartedAction) {
         const { customerName } = action.payload;
         const customer = yield call(sendCustomer, customerName);
         yield put(newCustomerAddEnded(customer));
+        yield put(push(`/customers/${customer.id}`));
     } catch (error) {
         yield put(newCustomerAddFailed(error.message));
     }

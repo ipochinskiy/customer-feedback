@@ -1,7 +1,6 @@
 @import './colors.scss';
 @import './constants.scss';
 
-
 .App {
     height: 100vh;
     background-color: $neutral3-3;
@@ -9,14 +8,28 @@
     &__header {
         height: $app-header-height;
         display: flex;
+        justify-content: center;
         align-items: center;
-        background-color: $primary1-l1;
-        padding: 0 16px;
+        background-color: $secondary2-l3;
+        box-shadow: 1px 1px 5px $neutral3-6;
 
         &__title {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        &__icon {
+            font-size: 48px;
+            margin-right: 8px;
+            color: $primary1;
+        }
+
+        &__text {
             font-size: 32px;
             line-height: 40px;
             font-weight: bold;
+            color: $neutral3-6;
         }
     }
 

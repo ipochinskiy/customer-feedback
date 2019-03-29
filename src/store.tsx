@@ -1,3 +1,5 @@
+import { routerMiddleware } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
 import {
     Action,
     applyMiddleware,
@@ -10,10 +12,11 @@ import {
     feedbackSaga,
     StoreState as FeedbackStoreState,
 } from './feedback';
-import { reducer } from './reducer';
+import { createReducer } from './reducer';
 
 interface StoreState {
     feedback: FeedbackStoreState,
+    router: any,
 }
 
 const logger = (store: any) => (next: any) => (action: Action) => {
@@ -28,10 +31,11 @@ const logger = (store: any) => (next: any) => (action: Action) => {
 }
 
 const sagaMiddleware = createSagaMiddleware();
+export const history = createBrowserHistory();
 
 export const store = createStore<StoreState, any, any, any>(
-    reducer,
-    applyMiddleware(logger, sagaMiddleware),
+    createReducer(history),
+    applyMiddleware(logger, sagaMiddleware, routerMiddleware(history)),
 );
 
 sagaMiddleware.run(feedbackSaga);

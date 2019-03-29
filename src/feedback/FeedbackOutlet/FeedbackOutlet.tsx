@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import { connect } from 'react-redux';
 import {
+    Redirect,
     RouteComponentProps,
     withRouter,
 } from 'react-router-dom';
@@ -66,10 +67,13 @@ export class FeedbackOutlet extends Component<ComponentProps> {
         if (match && match.params && match.params.customerId) {
             const {customerId} = match.params;
             const customer = customerList.find(({ id }) => id === customerId);
+            if (!customer) {
+                return <Redirect to='/customers' />;
+            }
             const feedbackList = customer && customer.feedbackList || [];
             rightColumn = (
                 <div className='FeedbackOutlet__column'>
-                    <FeedbackList feedbackList={feedbackList} addFeedback={text => this.addFeedback(text, customerId)} />
+                    <FeedbackList feedbackList={feedbackList} customer={customer} addFeedback={text => this.addFeedback(text, customerId)} />
                 </div>
             );
         } else {

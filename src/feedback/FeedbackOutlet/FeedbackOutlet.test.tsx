@@ -23,7 +23,7 @@ describe('Component: FeedbackOutlet', () => {
             .toHaveBeenCalledWith();
     });
 
-    describe('when "match.params.customerId" is set', () => {
+    describe('when "match.params.customerId" is set (normal)', () => {
         beforeEach(() => {
             props = createComponentProps();
             component = shallow(<FeedbackOutlet {...props} />);
@@ -40,7 +40,7 @@ describe('Component: FeedbackOutlet', () => {
             });
         });
 
-        it('should render customer list', () => {
+        it('should render feedback list', () => {
 
             expect(component.find('FeedbackList').props()).toMatchObject({
                 feedbackList: expect.arrayContaining([
@@ -48,7 +48,26 @@ describe('Component: FeedbackOutlet', () => {
                     expect.objectContaining({ id: 'second-one', text: 'We want to be able to invite people from outside' }),
                     expect.objectContaining({ id: 'yet-another-one', text: 'Color scheme needs some adjustments' }),
                 ]),
+                customer: expect.objectContaining({ id: 'iman', name: 'Iron Man' }),
             });
+        });
+    });
+
+    describe('when "match.params.customerId" is set (not existing id)', () => {
+        beforeEach(() => {
+            props = createComponentProps({
+                match: {
+                    params: {
+                        customerId: 'hawk',
+                    },
+                },
+            });
+            component = shallow(<FeedbackOutlet {...props} />);
+        });
+
+        it('should redirect to the "/customers" url', () => {
+
+            expect(component.find('Redirect')).toHaveProp('to', '/customers');
         });
     });
 

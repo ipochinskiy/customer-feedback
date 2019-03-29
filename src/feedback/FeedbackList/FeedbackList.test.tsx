@@ -4,6 +4,7 @@ import {
 } from 'enzyme';
 import React from 'react';
 
+import { Customer } from '../_domain/Customer';
 import FeedbackList, { PropTypes } from './FeedbackList';
 
 describe('Component: FeedbackList', () => {
@@ -15,17 +16,62 @@ describe('Component: FeedbackList', () => {
         component = shallow(<FeedbackList {...props} />);
     });
 
-    it('should render the title', () => {
+    it('should render the default title', () => {
 
-        expect(component).toIncludeText('Feedback');
+        expect(component).toIncludeText(`This customer's feedback`);
     });
 
-    it('should render the values', () => {
+    describe('with a customer set', () => {
+        beforeEach(() => {
+            props = createComponentProps({
+                customer: { name: 'Hawkeye' },
+            });
+            component = shallow(<FeedbackList {...props} />);
+        });
 
-        expect(component)
-            .toIncludeText('I have a problem')
-            .toIncludeText('A terrible one')
-            .toIncludeText('Yet another huge and fat one');
+        it('should render the title related to this customer', () => {
+
+            expect(component).toIncludeText(`Hawkeye's feedback`);
+        });
+    });
+
+    describe('with an empty list', () => {
+        beforeEach(() => {
+            props = createComponentProps({
+                feedbackList: [],
+            });
+            component = shallow(<FeedbackList {...props} />);
+        });
+
+        it('should render empty state', () => {
+
+            expect(component).toIncludeText('This customer has left no feedback yet');
+        });
+
+        describe('with a customer set', () => {
+            beforeEach(() => {
+                props = createComponentProps({
+                    feedbackList: [],
+                    customer: { name: 'Hawkeye' },
+                });
+                component = shallow(<FeedbackList {...props} />);
+            });
+
+            it('should render the empty state related to this customer', () => {
+
+                expect(component).toIncludeText('Hawkeye has left no feedback yet');
+            });
+        });
+    });
+
+    describe('with a few items in the list', () => {
+        it('should render the values', () => {
+
+            expect(component)
+                .toIncludeText('I have a problem')
+                .toIncludeText('A terrible one')
+                .toIncludeText('Yet another huge and fat one');
+        });
     });
 
     it('should render the button for adding new customers', () => {
@@ -45,17 +91,39 @@ describe('Component: FeedbackList', () => {
 
             expect(component.find('input'))
                 .toExist()
-                .toHaveProp('maxLength', 140);
+                .toHaveProp('maxLength', 140)
+                .toHaveProp('autoFocus')
+                .toHaveProp('placeholder', 'New feedback');
         });
 
-        describe('and after clicking this button again', () => {
+        it('should hide the Button', () => {
+
+            expect(component.find('Button')).not.toExist();
+        });
+
+        it('should render a close icon', () => {
+
+            expect(component.find('FontAwesomeIcon')).toExist();
+        });
+
+        describe('and after click on this icon', () => {
             beforeEach(() => {
-                component.find('Button').simulate('click');
+                component.find('.FeedbackList__icon').simulate('click');
             });
 
-            it('should not render the input field anymore', () => {
+            it('should hide the input field', () => {
 
                 expect(component.find('input')).not.toExist();
+            });
+
+            it('should hide the close icon', () => {
+
+                expect(component.find('FontAwesomeIcon')).not.toExist();
+            });
+
+            it('should show the Button', () => {
+
+                expect(component.find('Button')).toExist();
             });
         });
 
@@ -139,6 +207,7 @@ function createComponentProps(options = {}): PropTypes {
             { id: 'second one', text: 'A terrible one' },
             { id: 'third one', text: 'Yet another huge and fat one' },
         ],
+        customer: null as unknown as Customer,
         addFeedback: jest.fn(),
         ...options,
     };

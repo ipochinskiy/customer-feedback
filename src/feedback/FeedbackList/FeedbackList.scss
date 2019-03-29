@@ -8,6 +8,7 @@ $item-padding-aside: 24px;
 
 .FeedbackList {
     &__header {
+        height: 40px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -50,16 +51,34 @@ $item-padding-aside: 24px;
         padding: 0 $item-padding-aside;
         font-size: 16px;
         line-height: 24px;
-        cursor: pointer;
+        cursor: default;
         text-decoration: none;
         color: $neutral3-5;
+    }
 
-        &:hover {
-            background-color: $neutral3-1;
+    &__empty {
+        margin-top: 48px;
+        text-align: center;
+        color: $neutral3-5;
+
+        &__icon {
+            font-size: 100px;
         }
 
-        &--active {
-            background-color: $neutral3-1;
+        &__text {
+            margin-top: 24px;
+            font-size: 40px;
+        }
+    }
+
+    &__icon {
+        font-size: 48px;
+        margin-right: 8px;
+        color: $neutral3-4;
+        cursor: pointer;
+
+        &:hover {
+            color: $neutral3-5;
         }
     }
 }
