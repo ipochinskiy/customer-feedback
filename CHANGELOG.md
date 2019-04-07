@@ -1,3 +1,7 @@
+# 0.7.1 (2019-04-07)
+
+* fix scrolling of the body
+
 # 0.7.0 (2019-03-29)
 
 * update README
